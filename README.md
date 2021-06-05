@@ -1,46 +1,80 @@
-# Getting Started with Create React App
+<br />
+<p align="center">
+  <a href="https://github.com/Kristiannmiller/HE-Code-Exercise">
+    <img src="./assets/walkthrough.gif" alt="an overview gif of the application in action" width="600">
+  </a>
+  <h1 align="center" style="padding:0px; margin:10px 0px">Quality Engineer Code Challenge</h1>
+  <h5 align="center" style="margin:0px 0px 20px 0px; padding:0px;">Executed by Kristi Miller</h5>
+  <p align="left">
+    This is a code challenge for an open React Software Engineer position. The company wants to create a repository search application that utilizes the GitHub repository search API. The application displays the results of a query, and allows a user to sort and filter the results.
+    <br/>
+  </p>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About The Project
 
-## Available Scripts
+### Testing Tools Used
+* ReactJS
+* TypeScript
+* Jest
+* React Testing Library
+* Ant.io
 
-In the project directory, you can run:
+### Getting Started
 
-### `npm start`
+Run `git clone git@github.com:Kristiannmiller/HE-Code-Exercise.git`
+Navigate to the project directory and run `npm install`, then `npm start`
+The application should start in a new browser tab
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the tests, run `npm test`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Project Specifications
+#### User Stories
+- Search Input : The application should include an input to type in the text to search GitHub.
+- Search Results : The application should display the results of the search.
+- Sort Results : The results should be sorted by best match as a default, and allow a user to sort by stars.
+- Filter Results : The user should be able to filter their results by language.
+- Detailed Result Page : When a user clicks on a result, it should display a detailed page of that result.
 
-### `npm test`
+#### Development Details
+- Responsive Design : The application should render properly on mobile, tablet, laptop, and large desktop.
+- React : The application should be built using React.
+- Pages : The application should have at least two pages (Search page & Detail page).
+- Language : Please write your code in JavaScript or TypeScript.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About The Process
 
-### `npm run build`
+### My Process
+1. READING / RESEARCH : details.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. PLANNING / SETUP : details.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. LAYOUT : details.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. FUNCTIONALITY : details.
 
-### `npm run eject`
+3. TESTING : details.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. DOCUMENTATION : details.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Wins
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Win1
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Win2
 
-## Learn More
+## Challenges
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Challenge1
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Challenge2
+
+## Contact Kristi
+* [Github](https://github.com/Kristiannmiller)
+* [Portfolio](http://www.kristiannmiller.com)
+* [LinkedIn](https://www.linkedin.com/in/kristiannmiller/)
+
+## Additional Links
+- [Repository](https://github.com/Kristiannmiller/HE-Code-Exercise)
+- [Project Board](https://github.com/Kristiannmiller/HE-Code-Exercise/projects/1)
+- [GitHub Repository Search API](https://docs.github.com/en/rest/reference/search#search-repositories)
