@@ -3,7 +3,7 @@
   <a href="https://github.com/Kristiannmiller/HE-Code-Exercise">
     <img src="./assets/walkthrough.gif" alt="an overview gif of the application in action" width="600">
   </a>
-  <h1 align="center" style="padding:0px; margin:10px 0px">Quality Engineer Code Challenge</h1>
+  <h1 align="center" style="padding:0px; margin:10px 0px">React Engineer Code Exercise</h1>
   <h5 align="center" style="margin:0px 0px 20px 0px; padding:0px;">Executed by Kristi Miller</h5>
   <p align="left">
     This is a code challenge for an open React Software Engineer position. The company wants to create a repository search application that utilizes the GitHub repository search API. The application displays the results of a query, and allows a user to sort and filter the results.
@@ -23,7 +23,9 @@
 ### Getting Started
 
 Run `git clone git@github.com:Kristiannmiller/HE-Code-Exercise.git`
+
 Navigate to the project directory and run `npm install`, then `npm start`
+
 The application should start in a new browser tab
 
 To run the tests, run `npm test`
