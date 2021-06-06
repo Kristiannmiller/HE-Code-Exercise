@@ -19,3 +19,8 @@ octokit.hook.error('request', async (error, options) => {
   throw error
 })
 
+export const getSearchResults = async (search) => {
+  return await octokit.request('GET /search/repositories', {
+  q: search
+  })
+}
