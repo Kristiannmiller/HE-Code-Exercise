@@ -5,6 +5,7 @@
 }
 
 .input {
+  flex-grow: 1;
   font-size: 1.5em;
   color: #282c34;
   padding: 5px 20px;
@@ -29,6 +30,22 @@ select {
   width: 25%;
   margin: 10px;
   margin-right: 20px;
+}
+
+form {
+  flex-grow: 1;
+  display: flex;
+}
+
+.button-search {
+  box-sizing: border-box;
+  background-color: #2ea44f;
+  border: 3px solid #2ea44f;
+  width: 125px;
+  height: 4.5em;
+  vertical-align: top;
+  padding: 5px;
+  font-size: 1em;
 }
 
 .drop {
