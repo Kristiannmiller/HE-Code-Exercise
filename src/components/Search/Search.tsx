@@ -12,15 +12,25 @@ const Search: React.FC<Props> = ({
 }) => {
 
   const [keyword, setKeyword] = useState('');
+  const [hasResults, setHasResults] = useState(false);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
 
   const handleChange = (e) => {
     e.preventDefault()
+    if(keyword === "") {
+      setHasResults(false)
+      return
+    }
     let search = `${keyword}`
-    if(filter !== '') search += ` language:${filter.toLowerCase()}`
+    if(filter !== '' && filter !== '0') search += ` language:${filter.toLowerCase()}`
     if(sort === 'Stars') search += `&sort=stars`
     handleNewSearch(search)
+    setHasResults(true)
+  }
+
+  const displayingResults = () => {
+    return keyword !== "" && hasResults
   }
 
   return (
@@ -29,21 +39,23 @@ const Search: React.FC<Props> = ({
         <input className="input" id="keyword" onChange={event => setKeyword(event.target.value)} type="search" placeholder="Search Repositories By Keyword"/>
         <button className="button-search">SEARCH</button>
       </form>
-        <section className="filter-container">
-          <label className="label">Filter By :</label>
-          <select className="drop" id="filter" onChange={event => setFilter(event.target.value)} type="dropdown">
-            <option value="0">Select Language</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="Assembly">Assembly</option>
-            <option value="Ruby">Ruby</option>
-          </select>
-          <label className="label">Sort By :</label>
-          <select className="drop" id="sort" onChange={event => setSort(event.target.value)} type="dropdown">
-            <option value="0">Select Sort Option</option>
-            <option value="Default">Best Match</option>
-            <option value="Stars">Number of Stars</option>
-          </select>
-        </section>
+        {displayingResults() &&
+          <section className="filter-container">
+            <label className="label">Filter By :</label>
+            <select className="drop" id="filter" onChange={event => setFilter(event.target.value)} type="dropdown">
+              <option value="0">Select Language</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Assembly">Assembly</option>
+              <option value="Ruby">Ruby</option>
+            </select>
+            <label className="label">Sort By :</label>
+            <select className="drop" id="sort" onChange={event => setSort(event.target.value)} type="dropdown">
+              <option value="0">Select Sort Option</option>
+              <option value="Default">Best Match</option>
+              <option value="Stars">Number of Stars</option>
+            </select>
+          </section>
+        }
     </div>
   );
 }
