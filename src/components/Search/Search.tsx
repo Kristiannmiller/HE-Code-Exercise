@@ -38,14 +38,34 @@ const Search: React.FC<Props> = ({
     setHasResults(true)
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    if(hasResults) {
+      setHasResults(false)
+      setCurrentLanguages([])
+    }
+    if(keyword === "") {
+      resetSearch()
+    }
+    setKeyword(e.target.value)
+  }
+
   const displayingResults = () => {
     return keyword !== "" && hasResults
   }
 
+  const buildDropdownOptions = () => {
+    return currentLanguages.map(lang => {
+      return (
+        <option value={lang}>{lang}</option>
+      )
+    })
+  }
+
   return (
     <div className="search-container">
-      <form onSubmit={(e) => handleChange(e)}>
-        <input className="input" id="keyword" onChange={event => setKeyword(event.target.value)} type="search" placeholder="Search Repositories By Keyword"/>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
         <button className="button-search">SEARCH</button>
       </form>
         {displayingResults() &&
@@ -53,9 +73,8 @@ const Search: React.FC<Props> = ({
             <label className="label">Filter By :</label>
             <select className="drop" id="filter" onChange={event => setFilter(event.target.value)} type="dropdown">
               <option value="0">Select Language</option>
-              <option value="JavaScript">JavaScript</option>
-              <option value="Assembly">Assembly</option>
-              <option value="Ruby">Ruby</option>
+              {currentLanguages && buildDropdownOptions()}
+              <option value="Unspecified">Unspecified</option>
             </select>
             <label className="label">Sort By :</label>
             <select className="drop" id="sort" onChange={event => setSort(event.target.value)} type="dropdown">
