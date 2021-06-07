@@ -1,24 +1,28 @@
 import React from 'react';
 import { Repo } from '../App/App';
+import { Link } from 'react-router-dom';
+
 
 import { useState } from 'react';
 import './Card.css';
 
 type Props = {
   repoData: Repo[]
+  selectRepo(repoKey: string): void;
 };
 
 const Card: React.FC<Props> = ({
-  repoData
+  repoData,
+  selectRepo
 }) => {
 
 
   return (
-    <article className="card">
+    <Link className="card" onClick={() => selectRepo(repoData.key)} to={`/${repoData.key}/${repoData.name}`} data-testid={`${repoData.name}-link`}>
       <section className="card-header">
         <img className="card-avatar" src={repoData.ownerIcon} alt={`${repoData.ownerName}'s GitHub avatar`}/>
         <section className="card-badges">
-          <div className="card-language">{repoData.language}</div>
+          {repoData.language && <div className="card-language">{repoData.language}</div>}
           <div className="card-stars">{`⭑ ${repoData.stars}`}</div>
         </section>
       </section>
@@ -27,7 +31,7 @@ const Card: React.FC<Props> = ({
         {repoData.description && <p className="card-description">{repoData.description}</p>}
         {!repoData.description && <p className="card-description">No Description Available</p>}
       </section>
-    </article>
+    </Link>
   );
 }
 
