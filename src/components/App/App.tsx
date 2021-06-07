@@ -27,6 +27,7 @@ export type Repo = {
 function App() {
 
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
+  const [error, setError] = useState('')
 
   const handleNewSearch = (search) => {
     getSearchResults(search)
@@ -35,8 +36,10 @@ function App() {
   }
 
   const refineResults = (results) => {
-    return results.map(repo => {
+    if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
+    return results.map((repo, index) => {
       return {
+        key: `repo${index}`,
         name: repo.name,
         fullName: repo.full_name,
         ownerName: repo.owner.login,
@@ -58,16 +61,23 @@ function App() {
     setSearchResults([])
   }
 
+  const handleError = (message) => {
+    setError(message)
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <img className="logo" src={logo}/>
         <Search
+          error={error}
           handleNewSearch={handleNewSearch}
           resetSearch={resetSearch}
+          handleError={handleError}
         />
       </header>
         <ResultContainer
+          error={error}
           searchResults={searchResults}
         />
     </div>

@@ -5,11 +5,13 @@ import './Search.css';
 
 type Props = {
   handleNewSearch(search: string): void;
+  handleError(message: string): void;
   resetSearch: void;
 };
 
 const Search: React.FC<Props> = ({
   handleNewSearch,
+  handleError,
   resetSearch
 }) => {
 
@@ -34,15 +36,17 @@ const Search: React.FC<Props> = ({
     if(keyword === "") {
       setHasResults(false)
       resetSearch()
-      setError('Enter A Keyword to Start Hunting!')
+      handleError('Enter A Keyword to Start Hunting!')
+      return
     }
+    handleError('loading...')
     let search = `${keyword}`
     if(filter !== '') search += ` language:${filter.toLowerCase()}`
     if(sort === 'Stars') search += `&sort=stars`
     handleNewSearch(search)
     setHasResults(true)
+    handleError('')
   }
-
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -73,16 +77,16 @@ const Search: React.FC<Props> = ({
       <form onSubmit={(e) => handleSubmit(e)}>
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
         <section className="filter-container">
-          <label for="language" className="label">Filter By (optional) :</label>
-            <input className="drop" name="language" type="text" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
+          <label for="language" className="label">Language :</label>
+            <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
             <datalist id="popLanguages">{buildDropdownOptions()}</datalist>
           <label for="sort" className="label">Sort By :</label>
-          <select className="drop" name="sort" onChange={event => setSort(event.target.value)} type="dropdown">
+          <select className="filter" name="sort" onChange={event => setSort(event.target.value)} type="dropdown">
             <option value="Default">Best Match</option>
             <option value="Stars">Number of Stars</option>
           </select>
-          </section>
-        <button className="button-search">SEARCH</button>
+          <button className="button-search">SEARCH</button>
+        </section>
       </form>
     </div>
   );
