@@ -30,8 +30,8 @@ const RepoDetails: React.FC<Props> = ({
     <header className="detail-header">
       <img className="detail-avatar" src={repo.ownerIcon} alt={`${repo.ownerName}'s GitHub avatar`}/>
       <section className="detail-intro">
-        <h1 className="detail-title">{repo.name}</h1>
-        <h2 className="detail-owner">{repo.ownerName}</h2>
+        <h1 className="detail-title"><a className="atag-color" target="_blank" href={repo.repoUrl}>{repo.name}</a></h1>
+        <h2 className="detail-owner"><a className="atag-color" target="_blank" href={repo.ownerUrl}>{repo.ownerName}</a></h2>
         <section className="detail-description-wrap">
           {repo.description && <p className="detail-description">{repo.description}</p>}
           {!repo.description && <p className="detail-description">No Description Available</p>}
