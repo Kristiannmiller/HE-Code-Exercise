@@ -9,11 +9,13 @@ import './ResultContainer.css';
 type Props = {
   error: string;
   searchResults: Repo[];
+  selectRepo(repoKey: string): void;
 };
 
 const ResultContainer: React.FC<Props> = ({
   error,
-  searchResults
+  searchResults,
+  selectRepo
 }) => {
 
   const [keyword, setKeyword] = useState('');
@@ -31,6 +33,7 @@ const ResultContainer: React.FC<Props> = ({
       return (
         <Card
           repoData={repo}
+          selectRepo={selectRepo}
         />
       )
     })

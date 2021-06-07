@@ -22,12 +22,15 @@ export type Repo = {
   forks: number,
   openIssues: number,
   created: string,
-  lastUpdated: string
+  lastUpdated: string,
+  ssh: string,
+  ownerType: string
 };
 
 function App() {
 
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
+  const [selectedRepo, setSelectedRepo] = useState<Repo[]>([]);
   const [error, setError] = useState('')
 
   const handleNewSearch = (search) => {
@@ -53,7 +56,9 @@ function App() {
         forks: repo.forks,
         openIssues: repo.open_issues,
         created: repo.created_at,
-        lastUpdated: repo.updated_at
+        lastUpdated: repo.updated_at,
+        ssh: repo.ssh_url,
+        ownerType: repo.owner.type
       }
     })
   }
@@ -66,10 +71,17 @@ function App() {
     setError(message)
   }
 
+  const selectRepo = (repoKey) => {
+    let repo = searchResults.find(repo => repo.key === repoKey)
+    setSelectedRepo(repo)
+  }
+
   return (
     <div className="app">
       <header className="app-header">
-        <img className="logo" src={logo}/>
+        <Link to={`/`}>
+          <img className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
+        </Link>
         <Search
           error={error}
           handleNewSearch={handleNewSearch}
