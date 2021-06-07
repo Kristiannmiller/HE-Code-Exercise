@@ -31,6 +31,7 @@ function App() {
 
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<Repo[]>([]);
+  const [isDetailView, setIsDetailView] = useState(false)
   const [error, setError] = useState('')
 
   const handleNewSearch = (search) => {
@@ -72,6 +73,7 @@ function App() {
   }
 
   const selectRepo = (repoKey) => {
+    setIsDetailView(true)
     let repo = searchResults.find(repo => repo.key === repoKey)
     setSelectedRepo(repo)
   }
@@ -80,14 +82,17 @@ function App() {
     <div className="app">
       <header className="app-header">
         <Link to={`/`}>
-          <img className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
+          <img onClick={() => setIsDetailView(false)} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
-        <Search
+        {!isDetailView &&
+          <Search
           error={error}
           handleNewSearch={handleNewSearch}
           resetSearch={resetSearch}
           handleError={handleError}
-        />
+          />}
+          {isDetailView &&
+            <Link className="back" to={`/`} onClick={() => setIsDetailView(false)}>{`< back to search`}</Link>}
       </header>
       <Switch>
         <Route path='/:repoKey/:repoName'
