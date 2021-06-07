@@ -49,7 +49,7 @@ function App() {
         fullName: repo.full_name,
         ownerName: repo.owner.login,
         ownerIcon: repo.owner.avatar_url,
-        ownerUrl: repo.owner.url,
+        ownerUrl: repo.owner.html_url,
         repoUrl: repo.html_url,
         description: repo.description,
         language: repo.language,
@@ -78,11 +78,16 @@ function App() {
     setSelectedRepo(repo)
   }
 
+  const resetView = () => {
+    setSelectedRepo({})
+    setIsDetailView(false)
+  }
+
   return (
     <div className="app">
       <header className="app-header">
         <Link to={`/`}>
-          <img onClick={() => setIsDetailView(false)} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
+          <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
         {!isDetailView &&
           <Search
@@ -92,7 +97,7 @@ function App() {
           handleError={handleError}
           />}
           {isDetailView &&
-            <Link className="back" to={`/`} onClick={() => setIsDetailView(false)}>{`< back to search`}</Link>}
+            <Link className="back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
       </header>
       <Switch>
         <Route path='/:repoKey/:repoName'
