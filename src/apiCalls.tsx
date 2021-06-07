@@ -5,7 +5,6 @@ const octokit = new Octokit({auth: `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`})
 
 octokit.hook.after('request', async (response, options) => {
   if(response.status === 200) {
-    console.log(`${options.method} ${options.url}: ${response.status}`)
     return response
   }
   console.log(`${options.method} ${options.url}: ${response.status}`)
