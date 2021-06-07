@@ -23,11 +23,13 @@ const Search: React.FC<Props> = ({
   const [error, setError] = useState('')
   useMemo(() => setCurrentLanguages(languages), [languages])
 
-  const handleChange = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if(keyword === "") {
       setHasResults(false)
-      return
+      setCurrentLanguages([])
+      resetSearch()
+      setError('Enter A Keyword to Start Hunting!')
     }
     let search = `${keyword}`
     if(filter !== '' && filter !== '0') search += ` language:${filter.toLowerCase()}`
