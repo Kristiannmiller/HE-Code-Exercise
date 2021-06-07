@@ -20,7 +20,7 @@ octokit.hook.error('request', async (error, options) => {
 })
 
 export const getSearchResults = async (search) => {
-  return await octokit.request('GET /search/repositories?page=1&per_page=100', {
+  return await octokit.request('GET /search/repositories?page=1&per_page=30', {
   q: search
   })
 }
