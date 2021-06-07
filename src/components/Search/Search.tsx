@@ -1,20 +1,27 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import './Search.css';
 
 type Props = {
   handleNewSearch(search: string): void;
+  languages: string[];
+  resetSearch: void;
 };
 
 const Search: React.FC<Props> = ({
-  handleNewSearch
+  handleNewSearch,
+  languages,
+  resetSearch
 }) => {
 
   const [keyword, setKeyword] = useState('');
   const [hasResults, setHasResults] = useState(false);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
+  const [currentLanguages, setCurrentLanguages] = useState([])
+  const [error, setError] = useState('')
+  useMemo(() => setCurrentLanguages(languages), [languages])
 
   const handleChange = (e) => {
     e.preventDefault()

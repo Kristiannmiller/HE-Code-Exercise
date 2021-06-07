@@ -76,7 +76,7 @@ function App() {
         <img className="logo" src={logo}/>
         <Search
           handleNewSearch={handleNewSearch}
-          searchResults={searchResults}
+          languages={updateLanguages()}
           resetSearch={resetSearch}
         />
       </header>
