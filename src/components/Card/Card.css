@@ -1,0 +1,66 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  height:auto;
+  box-shadow: 1px 1px 10px #f1f1f1;
+  border-radius: 10px;
+  margin: 20px;
+  flex-grow: 1;
+  padding: 10px;
+  overflow-wrap: anywhere;
+  border: 1px solid white;
+  cursor: pointer;
+}
+.card:hover {
+  box-shadow: 1px 1px 20px inset #f1f1f1;
+}
+.card-header {
+  display: flex;
+  flex-direction: row;
+}
+.card-badges {
+  margin: 10px;
+  width: 150px;
+}
+.card-language {
+  background-color: #2ea44f;
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 3px;
+}
+.card-stars {
+  color: white;
+  background-color: #2B75F5;
+  padding: 5px;
+  border-radius: 5px;
+  width: 50%;
+  margin: 3px;
+}
+.card-avatar {
+  width: 100px;
+  border-radius: 360px;
+  margin: 5px;
+  border: 2px solid #2ea44f;
+}
+
+.card-title {
+  font-family: 'Yantramanav', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 2em;
+  color: #f1f1f1;
+}
+.description-wrap {
+  height: auto;
+  background-color: white;
+  border-radius: 5px;
+  flex-grow: 1;
+}
+.card-description {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
