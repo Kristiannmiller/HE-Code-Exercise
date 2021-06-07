@@ -13,36 +13,41 @@
   cursor: pointer;
 }
 .card:hover {
-  box-shadow: 1px 1px 20px inset #f1f1f1;
+  box-shadow: 1px 1px 20px inset #2ea44f;
 }
 .card-header {
   display: flex;
   flex-direction: row;
 }
 .card-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
   margin: 10px;
-  width: 150px;
+  width: 100%;
 }
 .card-language {
   background-color: #2ea44f;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 5px;
-  width: 100%;
+  width: fit-content;
   margin: 3px;
 }
 .card-stars {
   color: white;
   background-color: #2B75F5;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 5px;
-  width: 50%;
+  width: fit-content;
   margin: 3px;
 }
 .card-avatar {
   width: 100px;
   border-radius: 360px;
-  margin: 5px;
+  margin: 10px;
   border: 2px solid #2ea44f;
+  background-color: #f1f1f1;
 }
 
 .card-title {
