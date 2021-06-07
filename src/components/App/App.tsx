@@ -1,12 +1,14 @@
 import React from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
 import Search from '../Search/Search';
+import ResultContainer from '../ResultContainer/ResultContainer';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
 import { useState } from 'react';
 
 
-type Repo = {
+export type Repo = {
   name: string,
   fullName: string,
   ownerName: string,
@@ -25,7 +27,6 @@ type Repo = {
 function App() {
 
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
-
 
   const handleNewSearch = (search) => {
     getSearchResults(search)
@@ -53,19 +54,6 @@ function App() {
     })
   }
 
-  const updateLanguages = () => {
-    if(searchResults.length < 1) {
-      return []
-    } else {
-      return searchResults.reduce((acc, repo) => {
-        if(repo.language !== null && !acc.includes(repo.language)) {
-          acc.push(repo.language)
-        }
-        return acc
-      }, []).sort()
-    }
-  }
-
   const resetSearch = () => {
     setSearchResults([])
   }
@@ -76,10 +64,12 @@ function App() {
         <img className="logo" src={logo}/>
         <Search
           handleNewSearch={handleNewSearch}
-          languages={updateLanguages()}
           resetSearch={resetSearch}
         />
       </header>
+        <ResultContainer
+          searchResults={searchResults}
+        />
     </div>
   );
 }
