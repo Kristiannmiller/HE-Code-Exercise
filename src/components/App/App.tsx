@@ -53,6 +53,23 @@ function App() {
     })
   }
 
+  const updateLanguages = () => {
+    if(searchResults.length < 1) {
+      return []
+    } else {
+      return searchResults.reduce((acc, repo) => {
+        if(repo.language !== null && !acc.includes(repo.language)) {
+          acc.push(repo.language)
+        }
+        return acc
+      }, []).sort()
+    }
+  }
+
+  const resetSearch = () => {
+    setSearchResults([])
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -60,6 +77,7 @@ function App() {
         <Search
           handleNewSearch={handleNewSearch}
           searchResults={searchResults}
+          resetSearch={resetSearch}
         />
       </header>
     </div>
