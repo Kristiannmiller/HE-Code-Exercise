@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import Search from '../Search/Search';
 import ResultContainer from '../ResultContainer/ResultContainer';
+import RepoDetails from '../RepoDetails/RepoDetails';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
@@ -76,10 +77,24 @@ function App() {
           handleError={handleError}
         />
       </header>
-        <ResultContainer
-          error={error}
-          searchResults={searchResults}
-        />
+      <Switch>
+        <Route path='/:repoKey/:repoName'
+        render={({ match }) => {
+          const { repoKey } = match.params
+          return (
+            <RepoDetails
+              repo={selectedRepo}
+            />)
+          }}>
+        </Route>
+        <Route exact path='/'>
+          <ResultContainer
+            error={error}
+            searchResults={searchResults}
+            selectRepo={selectRepo}
+            />
+        </Route>
+      </Switch>
     </div>
   );
 }
