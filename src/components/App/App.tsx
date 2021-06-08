@@ -8,8 +8,8 @@ import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
 import { useState } from 'react';
 
-
 export type Repo = {
+  key: string,
   name: string,
   fullName: string,
   ownerName: string,
@@ -30,19 +30,27 @@ export type Repo = {
 function App() {
 
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
-  const [selectedRepo, setSelectedRepo] = useState<Repo[]>([]);
+  const [selectedRepo, setSelectedRepo] = useState<Repo>();
   const [isDetailView, setIsDetailView] = useState(false)
   const [error, setError] = useState('')
 
-  const handleNewSearch = (search) => {
-    getSearchResults(search)
-    .then(response => response.data.items)
-    .then(data => setSearchResults(refineResults(data)))
+  const blankRepo = {
+    key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
+    ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
+    forks: 0, openIssues: 0, created: '', lastUpdated: '', ssh: '',
+    ownerType: ''
   }
 
-  const refineResults = (results) => {
+  const handleNewSearch = (search: any) => {
+    getSearchResults(search)
+    .then(response => setSearchResults(refineResults(response.items)))
+    .catch(error => setError(error.message))
+  }
+
+  const refineResults = (results: any) => {
+    console.log("nowhere", results)
     if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
-    return results.map((repo, index) => {
+    return results.map((repo: any, index: number) => {
       return {
         key: `repo${index}`,
         name: repo.name,
@@ -68,18 +76,18 @@ function App() {
     setSearchResults([])
   }
 
-  const handleError = (message) => {
+  const handleError = (message: string) => {
     setError(message)
   }
 
-  const selectRepo = (repoKey) => {
+  const selectRepo = (repoKey: string) => {
     setIsDetailView(true)
     let repo = searchResults.find(repo => repo.key === repoKey)
-    setSelectedRepo(repo)
+    if(repo) setSelectedRepo(repo)
   }
 
   const resetView = () => {
-    setSelectedRepo({})
+    setSelectedRepo(blankRepo)
     setIsDetailView(false)
   }
 
@@ -91,7 +99,7 @@ function App() {
         </Link>
         {!isDetailView &&
           <Search
-          error={error}
+          errorMessage={error}
           handleNewSearch={handleNewSearch}
           resetSearch={resetSearch}
           handleError={handleError}

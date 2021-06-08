@@ -1,5 +1,5 @@
 import React from 'react';
-import { Repo } from '../App/App';
+import type Repo from '../App/App';
 import { Link } from 'react-router-dom';
 import fork from '../../assets/fork.png';
 
@@ -9,14 +9,14 @@ import { useState, useEffect } from 'react';
 import './RepoDetails.css';
 
 type Props = {
-  repo: Repo
+  repo: any
 };
 
 const RepoDetails: React.FC<Props> = ({
   repo
 }) => {
 
-  const createDate = (date) => {
+  const createDate = (date: string) => {
     let dateArray = new Date(date).toString().split(" ")
     dateArray[0] = `${dateArray[0]}day,`
     dateArray[1] = `${dateArray[1]}.`

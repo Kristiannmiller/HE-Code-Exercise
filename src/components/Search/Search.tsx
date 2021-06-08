@@ -4,12 +4,14 @@ import { useState } from 'react';
 import './Search.css';
 
 type Props = {
-  handleNewSearch(search: string): void;
+  errorMessage: string;
+  handleNewSearch: any;
   handleError(message: string): void;
-  resetSearch: void;
+  resetSearch(): void;
 };
 
 const Search: React.FC<Props> = ({
+  errorMessage,
   handleNewSearch,
   handleError,
   resetSearch
@@ -31,7 +33,7 @@ const Search: React.FC<Props> = ({
     'Erlang', 'Elixer', 'OCaml', 'OpenSCAD', 'Vim script'
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if(keyword === "") {
       setHasResults(false)
@@ -78,11 +80,11 @@ const Search: React.FC<Props> = ({
       <form onSubmit={(e) => handleSubmit(e)}>
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
         <section className="filter-container">
-          <label for="language" className="label">Language :</label>
+          <label htmlFor="language" className="label">Language :</label>
             <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
             <datalist id="popLanguages">{buildDropdownOptions()}</datalist>
-          <label for="sort" className="label">Sort By :</label>
-          <select className="filter" name="sort" onChange={event => setSort(event.target.value)} type="dropdown">
+          <label htmlFor="sort" className="label">Sort By :</label>
+          <select className="filter" name="sort" onChange={event => setSort(event.target.value)}>
             <option value="Default">Best Match</option>
             <option value="Stars">Number of Stars</option>
           </select>
