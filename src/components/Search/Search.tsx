@@ -45,7 +45,6 @@ const Search: React.FC<Props> = ({
     if(sort === 'Stars') search.sort = `stars`
     handleNewSearch(search)
     setHasResults(true)
-    console.log(search)
     handleError('')
   }
 
