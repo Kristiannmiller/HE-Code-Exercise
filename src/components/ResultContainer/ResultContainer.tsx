@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Repo } from '../App/App';
 import Card from '../Card/Card';
-
-
-import { useState } from 'react';
 import './ResultContainer.css';
 
 type Props = {

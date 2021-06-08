@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type Repo from '../App/App';
 import { Link } from 'react-router-dom';
-
-
-import { useState } from 'react';
 import './Card.css';
 
 type Props = {

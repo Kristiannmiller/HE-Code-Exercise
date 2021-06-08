@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type Repo from '../App/App';
 import { Link } from 'react-router-dom';
 import fork from '../../assets/fork.png';
-
-
-
-import { useState, useEffect } from 'react';
 import './RepoDetails.css';
 
 type Props = {
