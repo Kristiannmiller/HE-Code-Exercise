@@ -1,25 +1,25 @@
-import { Octokit } from "@octokit/core"
+const axios = require('axios');
 
-const octokit = new Octokit({auth: `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`})
-
-
-octokit.hook.after('request', async (response, options) => {
-  if(response.status === 200) {
-    return response
-  }
-  console.log(`${options.method} ${options.url}: ${response.status}`)
-})
-
-octokit.hook.error('request', async (error, options) => {
-  if (error.status === 304) {
-    return findInCache(error.headers.etag)
-  }
-
-  throw error
-})
-
-export const getSearchResults = async (search) => {
-  return await octokit.request('GET /search/repositories?page=1&per_page=30', {
-  q: search
-  })
+export async function getSearchResults(search: any) {
+  const url = `https://api.github.com/search/repositories?page=1&per_page=30`
+  const requestData = {
+		method: 'GET',
+		url,
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+		},
+		timeout: 15000,
+    params: search
+	};
+	try {
+		const response = await axios(requestData);
+		if (response.status === 204) return null;
+		if (typeof response.data !== 'undefined' && response.data !== null) {
+      return response.data;
+		}
+		throw new Error('No data was returned from the request.');
+	} catch (error) {
+		throw error;
+	}
 }

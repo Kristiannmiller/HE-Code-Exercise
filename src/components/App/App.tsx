@@ -8,8 +8,8 @@ import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
 import { useState } from 'react';
 
-
 export type Repo = {
+  key: string,
   name: string,
   fullName: string,
   ownerName: string,
@@ -29,20 +29,28 @@ export type Repo = {
 
 function App() {
 
+  const blankRepo = {
+    key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
+    ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
+    forks: 0, openIssues: 0, created: '', lastUpdated: '', ssh: '',
+    ownerType: ''
+  }
+
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
-  const [selectedRepo, setSelectedRepo] = useState<Repo[]>([]);
+  const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
   const [isDetailView, setIsDetailView] = useState(false)
   const [error, setError] = useState('')
 
-  const handleNewSearch = (search) => {
+
+  const handleNewSearch = (search: any) => {
     getSearchResults(search)
-    .then(response => response.data.items)
-    .then(data => setSearchResults(refineResults(data)))
+    .then(response => setSearchResults(refineResults(response.items)))
+    .catch(error => setError(error.message))
   }
 
-  const refineResults = (results) => {
+  const refineResults = (results: any) => {
     if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
-    return results.map((repo, index) => {
+    return results.map((repo: any, index: number) => {
       return {
         key: `repo${index}`,
         name: repo.name,
@@ -64,45 +72,43 @@ function App() {
     })
   }
 
-  const resetSearch = () => {
-    setSearchResults([])
-  }
+  const resetSearch = () => setSearchResults([])
 
-  const handleError = (message) => {
-    setError(message)
-  }
-
-  const selectRepo = (repoKey) => {
-    setIsDetailView(true)
-    let repo = searchResults.find(repo => repo.key === repoKey)
-    setSelectedRepo(repo)
-  }
+  const handleError = (message: string) => setError(message)
 
   const resetView = () => {
-    setSelectedRepo({})
+    setSelectedRepo(blankRepo)
     setIsDetailView(false)
   }
 
+  const selectRepo = (repoKey: string) => {
+    setIsDetailView(true)
+    let repo = searchResults.find(repo => repo.key === repoKey)
+    if(repo) setSelectedRepo(repo)
+  }
+
+
   return (
     <div className="app">
+
       <header className="app-header">
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
         {!isDetailView &&
           <Search
-          error={error}
-          handleNewSearch={handleNewSearch}
-          resetSearch={resetSearch}
-          handleError={handleError}
+            errorMessage={error}
+            handleNewSearch={handleNewSearch}
+            resetSearch={resetSearch}
+            handleError={handleError}
           />}
           {isDetailView &&
             <Link className="back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
       </header>
+
       <Switch>
         <Route path='/:repoKey/:repoName'
         render={({ match }) => {
-          const { repoKey } = match.params
           return (
             <RepoDetails
               repo={selectedRepo}
@@ -117,6 +123,7 @@ function App() {
             />
         </Route>
       </Switch>
+
     </div>
   );
 }
