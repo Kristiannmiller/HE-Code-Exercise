@@ -52,6 +52,7 @@ h1 {
   letter-spacing: -3px;
   font-size: 4em;
   color: #f1f1f1;
+	transition: all .5s ease-Out;
 }
 
 h2 {
@@ -60,6 +61,7 @@ h2 {
   letter-spacing: -1px;
   font-size: 3em;
   color: #2ea44f;
+	transition: all .5s ease-Out;
 }
 
 span {
@@ -76,10 +78,12 @@ input {
   height: 3em;
   background-color: #f1f1f1;
   border: 3px solid #2ea44f;
+	transition: all .5s ease-Out;
 }
 
 label {
   color: #f1f1f1;
+	transition: all .5s ease-Out;
 }
 
 select {

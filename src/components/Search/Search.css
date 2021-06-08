@@ -12,12 +12,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  transition: all .5s ease-Out;
 }
 
 .filter-wrap {
   width: 30%;
   flex-grow: 1;
   text-align: right;
+  transition: all .5s ease-Out;
 }
 
 /********  ELEMENTS  ********/
@@ -39,6 +41,7 @@
   font-size: 1em;
   cursor: pointer;
   border-radius: 10px;
+  transition: all .5s ease-Out;
 }
 
 #sort {
