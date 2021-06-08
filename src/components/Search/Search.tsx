@@ -40,15 +40,16 @@ const Search: React.FC<Props> = ({
       return
     }
     handleError('loading...')
-    let search = `${keyword}`
-    if(filter !== '') search += ` language:${filter.toLowerCase()}`
-    if(sort === 'Stars') search += `&sort=stars`
+    const search = {q: `${keyword}+`, sort: ''}
+    if(filter !== '') search.q += `language:${filter.toLowerCase()}`
+    if(sort === 'Stars') search.sort = `stars`
     handleNewSearch(search)
     setHasResults(true)
+    console.log(search)
     handleError('')
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     e.preventDefault()
     if(hasResults) {
       setHasResults(false)
