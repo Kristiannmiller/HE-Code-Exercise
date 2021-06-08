@@ -41,16 +41,18 @@ const RepoDetails: React.FC<Props> = ({
       <section className="owner-stats">
         <div className="repo-stats">
           <h1 className="repo-stat-title">{`${repo.name} GitHub Stats`}</h1>
-          <h2 className="repo-stat">{`Name:      ${repo.fullName}`}</h2>
-          <h2 className="repo-stat">{`Open Issues:      ${repo.openIssues}`}</h2>
-          <h2 className="repo-stat">{`Created:      ${createDate(repo.created)}`}</h2>
-          <h2 className="repo-stat">{`Last Update:      ${createDate(repo.lastUpdated)}`}</h2>
-          <h2 className="repo-stat">{`SSH:      ${repo.ssh}`}</h2>
+          <h2 className="repo-stat">{`Name: ${repo.fullName}`}</h2>
+          <h2 className="repo-stat">{`Open Issues: ${repo.openIssues}`}</h2>
+          <h2 className="repo-stat">{`Created: ${createDate(repo.created)}`}</h2>
+          <h2 className="repo-stat">{`Last Update: ${createDate(repo.lastUpdated)}`}</h2>
+          <h2 className="repo-stat">{`SSH: ${repo.ssh}`}</h2>
         </div>
-          {repo.ownerType === 'User' &&
-            <img className="owner-stats-git"
+        {repo.ownerType === 'User' &&
+          <img
+            className="owner-stats-git"
             src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${repo.ownerName}&show_icons=true&include_all_commits=true&count_private=true&theme=vue&line_height=30`}
-            alt={`An overview of ${repo.ownerName}'s GitHub statistics`} />}
+            alt={`An overview of ${repo.ownerName}'s GitHub statistics`}
+          />}
       </section>
 
     </article>
