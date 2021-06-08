@@ -50,7 +50,10 @@ const RepoDetails: React.FC<Props> = ({
       <h2 className="repo-stat">{`SSH:      ${repo.ssh}`}</h2>
     </div>
       {repo.ownerType === 'User' &&
-        <img className="owner-stats-git" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${repo.ownerName}&show_icons=true&include_all_commits=true&count_private=true&theme=vue&line_height=30`} />
+        <img
+        className="owner-stats-git"
+        src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${repo.ownerName}&show_icons=true&include_all_commits=true&count_private=true&theme=vue&line_height=30`}
+        alt={`An overview of ${repo.ownerName}'s GitHub statistics`} />
       }
     </section>
     </div>
