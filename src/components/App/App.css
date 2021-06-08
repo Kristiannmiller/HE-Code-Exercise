@@ -31,7 +31,8 @@
   transition: all .5s ease-Out;
 }
 
-.button .back {
+.back {
+  height: 1em;
   padding: 10px;
 }
 
