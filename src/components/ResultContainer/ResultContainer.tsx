@@ -24,9 +24,10 @@ const ResultContainer: React.FC<Props> = ({
   }
 
   const createCards = () => {
-    return searchResults.map(repo => {
+    return searchResults.map((repo:any, index:number) => {
       return (
         <Card
+          key={index}
           repoData={repo}
           selectRepo={selectRepo}
         />
