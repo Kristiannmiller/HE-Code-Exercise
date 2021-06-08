@@ -38,8 +38,13 @@ const Search: React.FC<Props> = ({
       resetSearch()
       handleError('Enter A Keyword to Start Hunting!')
       return
+    } else {
+      handleError('loading...')
+      submitSearch()
     }
-    handleError('loading...')
+  }
+
+  const submitSearch = () => {
     const search = {q: `${keyword}+`, sort: ''}
     if(filter !== '') search.q += `language:${filter.toLowerCase()}`
     if(sort === 'Stars') search.sort = `stars`
@@ -54,9 +59,7 @@ const Search: React.FC<Props> = ({
       setHasResults(false)
       resetSearch()
     }
-    if(keyword === "") {
-      resetSearch()
-    }
+    if(keyword === "") resetSearch()
     setKeyword(e.target.value)
   }
 
@@ -69,22 +72,27 @@ const Search: React.FC<Props> = ({
   }
 
   return (
-    <div className="search-container">
+    <section className="search-container">
+
       <form onSubmit={(e) => handleSubmit(e)}>
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
+
         <section className="filter-container">
           <label htmlFor="language" className="label">Language :</label>
-            <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
-            <datalist id="popLanguages">{buildDropdownOptions()}</datalist>
+          <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
+          <datalist id="popLanguages">{buildDropdownOptions()}</datalist>
+
           <label htmlFor="sort" className="label">Sort By :</label>
           <select className="filter" name="sort" onChange={event => setSort(event.target.value)}>
             <option value="Default">Best Match</option>
             <option value="Stars">Number of Stars</option>
           </select>
+
           <button className="button-search">SEARCH</button>
         </section>
       </form>
-    </div>
+
+    </section>
   );
 }
 
