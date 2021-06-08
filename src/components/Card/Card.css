@@ -1,87 +1,114 @@
-.card {
+/********  CONTAINERS  ********/
+
+.card-wrap {
+  width: 25%;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid white;
+  box-shadow: 1px 1px 10px #f1f1f1;
   display: flex;
   flex-direction: column;
-  width: 25%;
-  height:auto;
-  box-shadow: 1px 1px 10px #f1f1f1;
-  border-radius: 10px;
-  margin: 20px;
+  place-self: stretch;
   flex-grow: 1;
-  padding: 10px;
   overflow-wrap: anywhere;
-  border: 1px solid white;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all .5s ease-Out;
 }
+
 .card:hover {
   box-shadow: 1px 1px 20px inset #2ea44f;
 }
+
 .card-header {
   display: flex;
   flex-direction: row;
+  transition: all .5s ease-Out;
 }
+
 .card-badges {
+  margin: 10px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 100%;
-  margin: 10px;
-  width: 100%;
+  transition: all .5s ease-Out;
 }
-.card-language {
+
+.description-wrap {
+  height: auto;
+  flex-grow: 1;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/********  ELEMENTS  ********/
+
+.badge {
+  width: fit-content;
+  height: 2em;
+  padding: 5px 15px;
+  margin: 3px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
   color: white;
+}
+
+.language {
   background-color: #2ea44f;
-  padding: 5px 15px;
-  border-radius: 5px;
-  width: fit-content;
-  margin: 3px;
-  display: flex;
-  align-items: center;
 }
-.card-stars {
-  color: white;
+
+.stars {
   background-color: #2B75F5;
-  padding: 5px 15px;
-  border-radius: 5px;
-  width: fit-content;
-  margin: 3px;
-  display: flex;
-  align-items: center;
 }
-.card-forks {
-  color: white;
-  background-color: black;
-  padding: 5px 15px;
-  border-radius: 5px;
-  border: 1px solid #f1f1f1;
-  width: fit-content;
-  margin: 3px;
-  display: flex;
-  align-items: center;
-}
+
 .card-avatar {
   width: 100px;
-  border-radius: 360px;
+  height: 100px;
   margin: 10px;
   border: 2px solid #2ea44f;
+  border-radius: 360px;
   background-color: #f1f1f1;
 }
 
 .card-title {
   font-family: 'Yantramanav', sans-serif;
+  font-size: 2em;
   font-weight: 400;
   letter-spacing: 1px;
-  font-size: 2em;
   color: #f1f1f1;
 }
-.description-wrap {
-  height: auto;
-  background-color: white;
-  border-radius: 5px;
-  flex-grow: 1;
-}
+
 .card-description {
   padding: 10px;
   border-radius: 5px;
   background-color: white;
   color: black;
+}
+
+/********  MEDIA QUERIES  ********/
+
+@media screen and (max-width: 1050px) {
+  .card-wrap {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .card-wrap {
+    width: 100%;
+  }
+  .card-badges {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .badge {
+    padding: 5px 10px;
+    color: white;
+  }
 }
