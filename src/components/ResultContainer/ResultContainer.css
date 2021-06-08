@@ -22,18 +22,7 @@
   padding: 50px;
   /* box-shadow: 1px 1px 20px #f1f1f1; */
 }
-span {
-  font-weight: bold;
-  color: #2ea44f;
-}
 
-h1 {
-  font-family: 'Yantramanav', sans-serif;
-  font-weight: 400;
-  letter-spacing: -3px;
-  font-size: 4em;
-  color: #f1f1f1;
-}
 .greeting {
   margin-bottom: 5%;
 }
@@ -42,12 +31,4 @@ h1 {
   margin-bottom: 5%;
   font-size: 1.25em;
   color: white;
-}
-
-h2 {
-  font-family: 'Yantramanav', sans-serif;
-  font-weight: 400;
-  letter-spacing: -1px;
-  font-size: 3em;
-  color: #2ea44f;
 }
