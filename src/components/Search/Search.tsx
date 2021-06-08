@@ -62,9 +62,9 @@ const Search: React.FC<Props> = ({
   }
 
   const buildDropdownOptions = () => {
-    return popularLanguages.map(lang => {
+    return popularLanguages.map((lang: string, index: number) => {
       return (
-        <option>{lang}</option>
+        <option key={index}>{lang}</option>
       )
     })
   }
