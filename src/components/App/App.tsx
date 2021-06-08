@@ -103,7 +103,7 @@ function App() {
             handleError={handleError}
           />}
           {isDetailView &&
-            <Link className="back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
+            <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
       </header>
 
       <Switch>

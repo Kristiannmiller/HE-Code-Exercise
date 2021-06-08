@@ -78,17 +78,21 @@ const Search: React.FC<Props> = ({
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
 
         <section className="filter-container">
-          <label htmlFor="language" className="label">Language :</label>
+
+        <div className="filter-wrap">
+          <label className="label" htmlFor="language">Language :</label>
           <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
           <datalist id="popLanguages">{buildDropdownOptions()}</datalist>
-
-          <label htmlFor="sort" className="label">Sort By :</label>
+        </div>
+        <div className="filter-wrap" id="sort">
+          <label className="label" htmlFor="sort">Sort By :</label>
           <select className="filter" name="sort" onChange={event => setSort(event.target.value)}>
             <option value="Default">Best Match</option>
             <option value="Stars">Number of Stars</option>
           </select>
+        </div>
 
-          <button className="button-search">SEARCH</button>
+          <button className="button search">SEARCH</button>
         </section>
       </form>
 

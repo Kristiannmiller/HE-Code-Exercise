@@ -1,16 +1,9 @@
+/********  CONTAINERS  ********/
+
 .search-container {
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-.filter {
-  flex-grow: 0;
-  width: 20%;
-  height: 2em;
-  font-size: 1em;
-  margin: 5px;
-  margin-right: 20px;
 }
 
 .filter-container {
@@ -18,22 +11,77 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: flex-end;
 }
 
-.button-search {
+.filter-wrap {
+  width: 30%;
   flex-grow: 1;
-  box-sizing: border-box;
-  background-color: #2ea44f;
-  border: 3px solid #2ea44f;
-  width: 125px;
+  text-align: right;
+}
+
+/********  ELEMENTS  ********/
+
+.filter {
+  width: 60%;
   height: 2em;
-  vertical-align: top;
+  margin: 5px;
+  font-size: 1em;
+}
+
+.search {
+  width: 120px;
+  height: 1.9em;
   padding: 2px;
+  box-sizing: border-box;
+  flex-grow: 0;
+  vertical-align: top;
   font-size: 1em;
   cursor: pointer;
+  border-radius: 10px;
 }
 
-.drop {
-  width: 30%;
-  height: 2em;
+#sort {
+  flex-grow: 0;
+  text-align: center;
+}
+
+/********  MEDIA QUERIES  ********/
+
+@media screen and (max-width: 1050px) {
+  .search {
+    flex-grow: 0;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .filter {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .filter-container {
+    flex-direction: column;
+  }
+  .filter-wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+  }
+  .filter {
+    width: 30%;
+    flex-grow: 1;
+  }
+  .search {
+    margin-top: 5px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .filter {
+    font-size: .75em;
+  }
 }
