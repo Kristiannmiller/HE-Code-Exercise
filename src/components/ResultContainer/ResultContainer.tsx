@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Repo } from '../App/App';
 import Card from '../Card/Card';
 import './ResultContainer.css';
@@ -14,8 +14,6 @@ const ResultContainer: React.FC<Props> = ({
   searchResults,
   selectRepo
 }) => {
-
-  const [keyword, setKeyword] = useState('');
 
   const welcomePage = () => {
     if(error === '' && searchResults.length < 1) {

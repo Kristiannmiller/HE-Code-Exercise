@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import type Repo from '../App/App';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 

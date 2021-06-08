@@ -110,7 +110,6 @@ function App() {
       <Switch>
         <Route path='/:repoKey/:repoName'
         render={({ match }) => {
-          const { repoKey } = match.params
           return (
             <RepoDetails
               repo={selectedRepo}

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import type Repo from '../App/App';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
 

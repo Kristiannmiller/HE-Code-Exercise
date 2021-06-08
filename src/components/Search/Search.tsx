@@ -61,10 +61,6 @@ const Search: React.FC<Props> = ({
     setKeyword(e.target.value)
   }
 
-  const displayingResults = () => {
-    return keyword !== "" && hasResults
-  }
-
   const buildDropdownOptions = () => {
     return popularLanguages.map(lang => {
       return (
