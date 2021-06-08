@@ -18,8 +18,6 @@ const ResultContainer: React.FC<Props> = ({
   const welcomePage = () => {
     if(error === '' && searchResults.length < 1) {
       return true
-    } else {
-      return false
     }
   }
 
@@ -30,14 +28,14 @@ const ResultContainer: React.FC<Props> = ({
           key={index}
           repoData={repo}
           selectRepo={selectRepo}
-        />
-      )
+        />)
     })
   }
 
   return (
     <section className="result-container">
-      {welcomePage() &&
+
+      { welcomePage() &&
         <section className="welcome">
           <h1 className="greeting"><span>Welcome To</span> <strong>GitHunt</strong></h1>
           <article className="directions">
@@ -48,9 +46,10 @@ const ResultContainer: React.FC<Props> = ({
             <br></br><p><span>To get started</span> just type a keyword into the search bar and click 'SEARCH' or press 'Enter'.</p>
           </article>
           <h2>Happy Hunting!</h2>
-        </section>
-      }
-      {error === '' ? createCards() : <h1>{error}</h1>}
+        </section> }
+
+      { error === '' ? createCards() : <h1>{error}</h1> }
+
     </section>
   );
 }
