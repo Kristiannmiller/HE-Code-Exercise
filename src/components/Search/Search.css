@@ -87,4 +87,7 @@
   .filter {
     font-size: .75em;
   }
+  .search {
+    height: 1.5em;
+  }
 }

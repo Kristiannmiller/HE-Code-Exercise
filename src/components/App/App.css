@@ -16,6 +16,11 @@
   flex-direction: row;
   align-items: center;
   transition: all .5s ease-Out;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background-color: #282c34;
+  border-bottom: 2px solid #f1f1f1;
 }
 
 /********  ELEMENTS  ********/
