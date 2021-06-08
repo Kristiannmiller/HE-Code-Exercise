@@ -29,17 +29,18 @@ export type Repo = {
 
 function App() {
 
-  const [searchResults, setSearchResults] = useState<Repo[]>([]);
-  const [selectedRepo, setSelectedRepo] = useState<Repo>();
-  const [isDetailView, setIsDetailView] = useState(false)
-  const [error, setError] = useState('')
-
   const blankRepo = {
     key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
     ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
     forks: 0, openIssues: 0, created: '', lastUpdated: '', ssh: '',
     ownerType: ''
   }
+
+  const [searchResults, setSearchResults] = useState<Repo[]>([]);
+  const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
+  const [isDetailView, setIsDetailView] = useState(false)
+  const [error, setError] = useState('')
+
 
   const handleNewSearch = (search: any) => {
     getSearchResults(search)
@@ -48,7 +49,6 @@ function App() {
   }
 
   const refineResults = (results: any) => {
-    console.log("nowhere", results)
     if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
     return results.map((repo: any, index: number) => {
       return {
@@ -72,12 +72,13 @@ function App() {
     })
   }
 
-  const resetSearch = () => {
-    setSearchResults([])
-  }
+  const resetSearch = () => setSearchResults([])
 
-  const handleError = (message: string) => {
-    setError(message)
+  const handleError = (message: string) => setError(message)
+
+  const resetView = () => {
+    setSelectedRepo(blankRepo)
+    setIsDetailView(false)
   }
 
   const selectRepo = (repoKey: string) => {
@@ -86,27 +87,25 @@ function App() {
     if(repo) setSelectedRepo(repo)
   }
 
-  const resetView = () => {
-    setSelectedRepo(blankRepo)
-    setIsDetailView(false)
-  }
 
   return (
     <div className="app">
+
       <header className="app-header">
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
         {!isDetailView &&
           <Search
-          errorMessage={error}
-          handleNewSearch={handleNewSearch}
-          resetSearch={resetSearch}
-          handleError={handleError}
+            errorMessage={error}
+            handleNewSearch={handleNewSearch}
+            resetSearch={resetSearch}
+            handleError={handleError}
           />}
           {isDetailView &&
             <Link className="back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
       </header>
+
       <Switch>
         <Route path='/:repoKey/:repoName'
         render={({ match }) => {
@@ -124,6 +123,7 @@ function App() {
             />
         </Route>
       </Switch>
+
     </div>
   );
 }
