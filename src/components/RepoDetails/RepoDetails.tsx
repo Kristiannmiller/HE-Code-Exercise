@@ -33,7 +33,7 @@ const RepoDetails: React.FC<Props> = ({
 
 // COMPONENT RENDER //
   return (
-    <article className="box detail-container">
+    <article className="box detail-container" data-testid="repo-details">
       <header className="detail-header">
         <img className="detail-avatar" src={repo.ownerIcon} alt={`${repo.ownerName}'s GitHub avatar`}/>
           <h1 className="detail-title"><a className="atag-color" rel="noreferrer" target="_blank" href={repo.repoUrl}>{repo.name}</a></h1>

@@ -2,12 +2,11 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
-import Card from '../components/Card/Card';
+import RepoDetails from '../components/RepoDetails/RepoDetails';
+window.scrollTo = jest.fn();
 
 describe('Repo Card', () => {
 
-  const selectRepo = jest.fn();
   const repo = {
     key: `repo1`, name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
     ownerName: 'Kristiannmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/65047537?v=4',
@@ -20,31 +19,25 @@ describe('Repo Card', () => {
     ownerName: 'Kristiannmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/65047537?v=4',
     ownerUrl: 'https://api.github.com/users/Kristiannmiller', repoUrl: 'https://github.com/Kristiannmiller/HE-Code-Exercise',
     description: '', language: '', stars: 0, forks: 0, openIssues: 7, created: '2021-06-05T21:42:19Z',
-    lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'User'
+    lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'Organization'
   };
 
-  it('Renders Repo Card', () => {
+  it('Renders the Repo Details component', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
-    const cardContainer = screen.getByTestId(`${repo.name}-link`);
-    expect(cardContainer).toBeInTheDocument();
+    const detailsContainer = screen.getByTestId(`repo-details`);
+    expect(detailsContainer).toBeInTheDocument();
   });
   it('Displays the Repository name', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
@@ -55,10 +48,7 @@ describe('Repo Card', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
@@ -66,14 +56,22 @@ describe('Repo Card', () => {
     expect(userAvatarAlt).toBeInTheDocument();
     expect(userAvatarAlt.src).toBe(`${repo.ownerIcon}`);
   });
+  it("Displays the Owner's name", () => {
+
+    render(
+      <MemoryRouter>
+      <RepoDetails repo={repo}/>
+      </MemoryRouter>
+    );
+
+    const ownerName = screen.getByText(`${repo.ownerName}`);
+    expect(ownerName).toBeInTheDocument();
+  });
   it("Displays the Repository description", () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
@@ -84,10 +82,7 @@ describe('Repo Card', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={sadRepo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={sadRepo}/>
       </MemoryRouter>
     );
 
@@ -98,10 +93,7 @@ describe('Repo Card', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
@@ -112,10 +104,7 @@ describe('Repo Card', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
@@ -126,10 +115,7 @@ describe('Repo Card', () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={sadRepo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={sadRepo}/>
       </MemoryRouter>
     );
 
@@ -138,20 +124,27 @@ describe('Repo Card', () => {
     expect(repoLanguage).not.toBeInTheDocument();
     expect(languageBadge).not.toBeInTheDocument();
   });
-  it("Runs selectRepo function when clicked", () => {
+  it("Displays the Repository's fork count", () => {
 
     render(
       <MemoryRouter>
-        <Card
-          repoData={repo}
-          selectRepo={selectRepo}
-        />
+        <RepoDetails repo={repo}/>
       </MemoryRouter>
     );
 
-    const cardContainer = screen.getByTestId(`${repo.name}-link`);
-    expect(cardContainer).toBeInTheDocument();
-    userEvent.click(cardContainer);
-    expect(selectRepo).toHaveBeenCalled();
+    const repoForks = screen.getByText(`${repo.forks}`);
+    expect(repoForks).toBeInTheDocument();
   });
+  it("Displays the Owner's GitHub stats", () => {
+
+    render(
+      <MemoryRouter>
+        <RepoDetails repo={sadRepo}/>
+      </MemoryRouter>
+    );
+
+    const ownerStats = screen.queryByAltText(`An overview of ${repo.ownerName}'s GitHub statistics`);
+    expect(ownerStats).not.toBeInTheDocument();
+  });
+
 });
