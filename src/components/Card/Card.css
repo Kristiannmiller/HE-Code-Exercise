@@ -16,7 +16,7 @@
   transition: all .5s ease-Out;
 }
 
-.card:hover {
+.card-wrap:hover {
   box-shadow: 1px 1px 20px inset #2ea44f;
 }
 
