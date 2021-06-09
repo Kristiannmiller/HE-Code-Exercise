@@ -1,15 +1,15 @@
-// ASSETS //
+/**** ASSETS ****/
 import React, { useState } from 'react';
 import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
-// COMPONENTS //
+/**** COMPONENTS ****/
 import Search from '../Search/Search';
 import ResultContainer from '../ResultContainer/ResultContainer';
 import RepoDetails from '../RepoDetails/RepoDetails';
 
-// TYPES //
+/**** TYPES ****/
 export type Repo = {
   key: string,
   name: string,
@@ -31,28 +31,29 @@ export type Repo = {
 
 const App = () => {
 
-// Global Variables //
+/**** GLOBAL VARIABLES ****/
   const blankRepo = {
     key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
     ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
     forks: 0, openIssues: 0, created: '', lastUpdated: '', ssh: '',
     ownerType: ''
-  };
+  }; // needed for TypeScript verification
 
-// State //
-  const [searchResults, setSearchResults] = useState<Repo[]>([]);
-  const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
-  const [isDetailView, setIsDetailView] = useState(false);
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
-// Handler Functions //
+/**** STATE ****/
+  const [searchResults, setSearchResults] = useState<Repo[]>([]); //an array of repo objects that have been tailored (see refineResults)
+  const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo); //if a user clicks on a repo card, this stores the data for the selected repo
+  const [isDetailView, setIsDetailView] = useState(false); //boolean determining if the RepoDetails component is rendered - Used for conditional rendering of Search component
+  const [error, setError] = useState(''); //custom error message
+  const [isLoading, setIsLoading] = useState(false); //loading boolean
+
+/**** HANDLER FUNCTIONS ****/
   const handleNewSearch = (search: any) => {
     setIsLoading(true)
     getSearchResults(search)
     .then(response => setSearchResults(handleResults(response.items)))
     .catch(error => setError(error.message))
-  };
+  }; //fetches data from api, and sets it to state
 
   const handleResults = (results: any) => {
     if(results.length < 1) {
@@ -63,9 +64,9 @@ const App = () => {
       setIsLoading(false)
       return newResults
     };
-  };
+  }; //called in handleNewSearch fn - error handling for empty results - returns tailored results using refineResults fn
 
-  const handleError = (message: string) => setError(message);
+  const handleError = (message: string) => setError(message); //prop for Search component to change error status
 
   const selectRepo = (repoKey: string) => {
     setIsLoading(true)
@@ -73,9 +74,9 @@ const App = () => {
     let repo = searchResults.find(repo => repo.key === repoKey)
     if(repo) setSelectedRepo(repo)
     setIsLoading(false)
-  };
+  }; //prop for ResultContainer - sets selectedRepo and switches to RepoDetail view
 
-// Helper Functions //
+/**** HELPER FUNCTIONS ****/
   const refineResults = (results: any) => {
     return results.map((repo: any, index: number) => {
       return {
@@ -97,16 +98,16 @@ const App = () => {
         ownerType: repo.owner.type
       }
     });
-  };
+  }; //cleans up data for ease of use
 
-  const resetSearch = () => setSearchResults([]);
+  const resetSearch = () => setSearchResults([]); //prop for Search component to clear results
 
   const resetView = () => {
     setSelectedRepo(blankRepo)
     setIsDetailView(false)
-  };
+  }; //resets the state to change pages. Allows user to navigate back to their search.
 
-// Render Functions //
+/**** RENDER FUNCTIONS ****/
   const renderSearch = () => {
     if(!isDetailView) {
       return (
@@ -120,7 +121,7 @@ const App = () => {
         <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>
       )
     };
-  };
+  }; //renders the 'BACK' button when in RepoDetails view, and the Search component otherwise
 
   const renderRepoDetails = () => {
     if(error || selectedRepo.key === '0') {
@@ -132,9 +133,9 @@ const App = () => {
         <RepoDetails repo={selectedRepo}/>
       )
     };
-  };
+  }; //renders the ResultContainer component to handle an error (or an empty result/page refresh), and the RepoDetails component otherwise
 
-// COMPONENT RENDER //
+/**** COMPONENT RENDER ****/
   return (
     <BrowserRouter>
     <div className="app" data-testid="app-wrap">
