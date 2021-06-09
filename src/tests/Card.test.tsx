@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import Card from '../components/Card/Card';
 
-describe('Repo Card', () => {
+describe("Repo Card", () => {
 
   const selectRepo = jest.fn();
   const repo = {
@@ -23,7 +23,7 @@ describe('Repo Card', () => {
     lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'User'
   };
 
-  it('Renders Repo Card', () => {
+  it("Renders Repo Card", () => {
 
     render(
       <MemoryRouter>
@@ -37,7 +37,7 @@ describe('Repo Card', () => {
     const cardContainer = screen.getByTestId(`${repo.name}-link`);
     expect(cardContainer).toBeInTheDocument();
   });
-  it('Displays the Repository name', () => {
+  it("Displays the Repository name", () => {
 
     render(
       <MemoryRouter>
@@ -91,7 +91,7 @@ describe('Repo Card', () => {
       </MemoryRouter>
     );
 
-    const noDescription = screen.getByText(`No Description Available`);
+    const noDescription = screen.getByText('No Description Available');
     expect(noDescription).toBeInTheDocument();
   });
   it("Displays the Repository's star count", () => {
