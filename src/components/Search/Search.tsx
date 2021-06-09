@@ -1,27 +1,27 @@
-// ASSETS //
+/**** ASSETS ****/
 import React, { useState } from 'react';
 import './Search.css';
 
-// TYPES //
+/**** TYPES ****/
 type Props = {
-  handleNewSearch: any;
+  handleNewSearch: any; //not sure why TypeScript is erroring on this fn when I assign it a proper type
   handleError(message: string): void;
   resetSearch(): void;
 };
 
 const Search: React.FC<Props> = ({
-  handleNewSearch,
-  handleError,
-  resetSearch
+  handleNewSearch, //fn from App - fetches data from api, and sets it to state
+  handleError, //fn from App - changes App error status
+  resetSearch //fn from App - clears search results in App
 }) => {
 
-// State //
-  const [keyword, setKeyword] = useState('');
-  const [hasResults, setHasResults] = useState(false);
-  const [filter, setFilter] = useState('');
-  const [sort, setSort] = useState('');
+/**** STATE ****/
+  const [keyword, setKeyword] = useState(''); //current value of keyword input (updates on change)
+  const [hasResults, setHasResults] = useState(false); //boolean determining if there are currently search results being displayed
+  const [filter, setFilter] = useState(''); //current value of language filter input (updates on change)
+  const [sort, setSort] = useState(''); //current value of sort input (updates on change)
 
-// Global Variables //
+/**** STATE ****/
   const popularLanguages = [
     'JavaScript', 'Python', 'C', 'Java', 'Go', 'Perl', 'Ruby', 'Swift', 'Scala', 'PHP', 'C++',
     'R', 'Objective-C', 'SQL', 'MATLAB', 'Rust', 'TypeScript', 'Kotlin', 'CSS', 'HTML', 'Groovy',
@@ -30,9 +30,9 @@ const Search: React.FC<Props> = ({
     'Bash', 'Clojure', 'MQL4', 'Apex', 'LabVIEW', 'ABL', 'D', 'SAS', 'Logo', 'C#', 'Jupyter Notebook', 'CoffeeScript',
     'QML', 'Less', 'Makefile', 'Lua', 'Roff', 'Vala', 'Solidity', 'Starlark', 'TeX', 'Vue', 'React', 'React Native',
     'Erlang', 'Elixer', 'OCaml', 'OpenSCAD', 'Vim script'
-  ];
+  ]; //autopopulated options for the language filter to make search results more probable
 
-// Handler Functions //
+/**** HANDLER FUNCTIONS ****/
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if(keyword === "") {
@@ -44,7 +44,7 @@ const Search: React.FC<Props> = ({
       handleError('loading...')
       submitSearch()
     };
-  };
+  }; //called when form is submitted - handles delegation of events to display search results or error message
 
   const submitSearch = () => {
     const search = {q: `${keyword}+`, sort: ''}
@@ -53,7 +53,7 @@ const Search: React.FC<Props> = ({
     handleNewSearch(search)
     setHasResults(true)
     handleError('')
-  };
+  }; //handles delegation of events to display search results
 
   const handleChange = (e: any) => {
     e.preventDefault()
@@ -63,17 +63,18 @@ const Search: React.FC<Props> = ({
     }
     if(keyword === "") resetSearch()
     setKeyword(e.target.value)
-  };
+  }; //handles setting state to current input values on change, and resets results if needed
 
-// Render Functions //
+/**** RENDER FUNCTIONS ****/
   const buildDropdownOptions = () => {
     return popularLanguages.map((lang: string, index: number) => {
       return (
         <option key={index}>{lang}</option>
       )
     });
-  };
+  }; //returns an array of autocomplete options for the languages input (input still works with any text)
 
+/**** COMPONENT RENDER ****/
   return (
     <section className="search-container" data-testid="search-wrap">
       <form onSubmit={(e) => handleSubmit(e)}>

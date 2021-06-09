@@ -68,6 +68,8 @@ const App = () => {
 
   const handleError = (message: string) => setError(message); //prop for Search component to change error status
 
+  const resetSearch = () => setSearchResults([]); //prop for Search component to clear results
+
   const selectRepo = (repoKey: string) => {
     setIsLoading(true)
     setIsDetailView(true)
@@ -100,7 +102,6 @@ const App = () => {
     });
   }; //cleans up data for ease of use
 
-  const resetSearch = () => setSearchResults([]); //prop for Search component to clear results
 
   const resetView = () => {
     setSelectedRepo(blankRepo)
