@@ -18,8 +18,8 @@ const RepoDetails: React.FC<Props> = ({
 
 /**** HELPER FUNCTIONS ****/
   const createDate = (date: string) => {
-    let day = new Date(date).toString().split(" ")
-    return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
+    let day = new Date(date).toString().split(' ')
+    return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(' ')
   }; //formats OTC date to a UX friendly string
 
 /**** RENDER FUNCTIONS ****/
