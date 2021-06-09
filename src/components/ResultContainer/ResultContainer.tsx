@@ -34,9 +34,10 @@ const ResultContainer: React.FC<Props> = ({
 
 // Render Functions //
   const createCards = () => {
-    return searchResults.map(repo => {
+    return searchResults.map((repo: any, index: number) => {
       return (
         <Card
+          key={index}
           repoData={repo}
           selectRepo={selectRepo}
         />
@@ -62,7 +63,7 @@ const ResultContainer: React.FC<Props> = ({
 
 // COMPONENT RENDER //
   return (
-    <section className="result-container">
+    <section className="result-container" data-testid="results">
       {welcomePage() &&
         <section className="box message-container">
           <h1 className="greeting"><span>Welcome To</span> <strong>GitHunt</strong></h1>

@@ -75,7 +75,7 @@ const Search: React.FC<Props> = ({
   };
 
   return (
-    <section className="search-container">
+    <section className="search-container" data-testid="search-wrap">
       <form onSubmit={(e) => handleSubmit(e)}>
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
         <section className="filter-container">

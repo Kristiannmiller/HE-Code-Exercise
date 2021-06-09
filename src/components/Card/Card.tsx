@@ -20,7 +20,7 @@ const Card: React.FC<Props> = ({
       <header className="card-header">
         <img className="card-avatar" src={repoData.ownerIcon} alt={`${repoData.ownerName}'s GitHub avatar`}/>
         <section className="card-badges">
-          {repoData.language && <div className="badge language">{repoData.language}</div>}
+          {repoData.language && <div data-testid="lang" className="badge language">{repoData.language}</div>}
           <div className="badge stars">{`⭑ ${repoData.stars}`}</div>
         </section>
       </header>

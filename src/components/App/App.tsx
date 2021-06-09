@@ -1,6 +1,6 @@
 // ASSETS //
 import React, { useState } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
@@ -136,7 +136,8 @@ const App = () => {
 
 // COMPONENT RENDER //
   return (
-    <div className="app">
+    <BrowserRouter>
+    <div className="app" data-testid="app-wrap">
       <header className="app-header">
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
@@ -152,6 +153,7 @@ const App = () => {
         </Route>
       </Switch>
     </div>
+    </BrowserRouter>
   );
 };
 
