@@ -1,11 +1,13 @@
+// ASSETS //
 import React, { useState, useMemo } from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 
+// TYPES //
 type Props = {
-  error: string
-  loading: boolean
-  repo: any
+  error: string;
+  loading: boolean;
+  repo: any;
 };
 
 const RepoDetails: React.FC<Props> = ({
@@ -14,20 +16,18 @@ const RepoDetails: React.FC<Props> = ({
   repo
 }) => {
 
+// State //
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   useMemo(() => setIsLoading(loading), [isLoading]);
 
+// Helper Functions //
   const createDate = (date: string) => {
     let day = new Date(date).toString().split(" ")
-    return ([`${day[0]}day,`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
-  }
+    return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
+  };
 
-  const displayLoading = () => {
-    
-  }
-
+// COMPONENT RENDER //
   return (
     <article className="box detail-container">
       <header className="detail-header">
@@ -47,7 +47,6 @@ const RepoDetails: React.FC<Props> = ({
             </div>
           </section>
       </header>
-
       <section className="stats-container">
         <div className="repo-stats">
           <h1 className="repo-stat-title">{`${repo.name} GitHub Stats`}</h1>
@@ -65,9 +64,8 @@ const RepoDetails: React.FC<Props> = ({
             alt={`An overview of ${repo.ownerName}'s GitHub statistics`}/>
         </div>}
       </section>
-
     </article>
   );
-}
+};
 
 export default RepoDetails;
