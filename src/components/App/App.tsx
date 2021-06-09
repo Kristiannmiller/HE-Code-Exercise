@@ -119,7 +119,7 @@ const App = () => {
         />)
     } else {
       return (
-        <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>
+        <Link className="button back" to={"/"} onClick={() => resetView()}>{"< back to search"}</Link>
       )
     };
   }; //renders the 'BACK' button when in RepoDetails view, and the Search component otherwise
@@ -141,16 +141,16 @@ const App = () => {
     <BrowserRouter>
     <div className="app" data-testid="app-wrap">
       <header className="app-header">
-        <Link to={`/`}>
+        <Link to={"/"}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
         {renderSearch()}
       </header>
       <Switch>
-        <Route path='/:repoKey/:repoName'
+        <Route path="/:repoKey/:repoName"
         render={({ match }) => renderRepoDetails()}>
         </Route>
-        <Route exact path='/'>
+        <Route exact path="/">
           <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
         </Route>
       </Switch>
