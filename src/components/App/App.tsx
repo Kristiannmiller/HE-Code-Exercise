@@ -1,6 +1,6 @@
 // ASSETS //
 import React, { useState } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
@@ -136,6 +136,7 @@ const App = () => {
 
 // COMPONENT RENDER //
   return (
+    <BrowserRouter>
     <div className="app">
       <header className="app-header">
         <Link to={`/`}>
@@ -152,6 +153,7 @@ const App = () => {
         </Route>
       </Switch>
     </div>
+    </BrowserRouter>
   );
 };
 
