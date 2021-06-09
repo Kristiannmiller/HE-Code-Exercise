@@ -9,13 +9,13 @@ import Search from '../components/Search/Search';
 import App from '../components/App/App';
 jest.mock('../apiCalls.tsx');
 
-describe('Search', () => {
+describe("Search", () => {
 
   const handleNewSearch = jest.fn();
   const resetSearch = jest.fn();
   const handleError = jest.fn();
 
-  it('Renders the Search elements', () => {
+  it("Renders the Search elements", () => {
 
     render(
       <MemoryRouter>
@@ -27,11 +27,11 @@ describe('Search', () => {
       </MemoryRouter>
     )
 
-    const searchContainer = screen.getByTestId(`search-wrap`);
+    const searchContainer = screen.getByTestId('search-wrap');
     expect(searchContainer).toBeInTheDocument();
   });
 
-  it('Renders the keyword input', () => {
+  it("Renders the keyword input", () => {
 
     render(
       <MemoryRouter>
@@ -43,10 +43,10 @@ describe('Search', () => {
       </MemoryRouter>
     )
 
-    const keywordInput = screen.getByPlaceholderText("Search Repositories By Keyword");
+    const keywordInput = screen.getByPlaceholderText('Search Repositories By Keyword');
     expect(keywordInput).toBeInTheDocument();
   });
-  it('Renders the language filter input', () => {
+  it("Renders the language filter input", () => {
 
     render(
       <MemoryRouter>
@@ -58,12 +58,12 @@ describe('Search', () => {
       </MemoryRouter>
     )
 
-    const languageInput = screen.getByPlaceholderText("optional");
-    const languageLabel = screen.getByText("Language :");
+    const languageInput = screen.getByPlaceholderText('optional');
+    const languageLabel = screen.getByText('Language :');
     expect(languageInput).toBeInTheDocument();
     expect(languageLabel).toBeInTheDocument();
   });
-  it('Renders the sort by input', () => {
+  it("Renders the sort by input", () => {
 
     render(
       <MemoryRouter>
@@ -75,12 +75,12 @@ describe('Search', () => {
       </MemoryRouter>
     )
 
-    const sortByInput = screen.getByText("Best Match");
-    const sortByLabel = screen.getByText("Sort By :");
+    const sortByInput = screen.getByText('Best Match');
+    const sortByLabel = screen.getByText('Sort By :');
     expect(sortByInput).toBeInTheDocument();
     expect(sortByLabel).toBeInTheDocument();
   });
-  it('Renders the search button', () => {
+  it("Renders the search button", () => {
 
     render(
       <MemoryRouter>
@@ -92,9 +92,13 @@ describe('Search', () => {
       </MemoryRouter>
     )
 
-    const searchButton = screen.getByText("SEARCH");
+    const searchButton = screen.getByText('SEARCH');
     expect(searchButton).toBeInTheDocument();
   });
+
+
+//BELOW: My attempt at async testing. I kept getting the loading screen instead of the results of the search
+
   // it('Should allow a user to search by keyword', async () => {
   //
   //   getSearchResults.mockResolvedValue(testResults);

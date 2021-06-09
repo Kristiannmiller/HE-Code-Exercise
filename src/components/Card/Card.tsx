@@ -1,20 +1,20 @@
-// ASSETS //
+/**** ASSETS ****/
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
 
-// TYPES //
+/**** TYPES ****/
 type Props = {
-  repoData: any;
+  repoData: any; //would ideally like to export the Repo type from App to use here
   selectRepo(repoKey: string): void;
 };
 
 const Card: React.FC<Props> = ({
-  repoData,
-  selectRepo
+  repoData, //single repo object
+  selectRepo //fn that sets the selected repo to be displayed in RepoDetails
 }) => {
 
-// COMPONENT RENDER //
+/**** COMPONENT RENDER ****/
   return (
     <Link className="card-wrap" onClick={() => selectRepo(repoData.key)} to={`/${repoData.key}/${repoData.name}`} data-testid={`${repoData.name}-link`}>
       <header className="card-header">

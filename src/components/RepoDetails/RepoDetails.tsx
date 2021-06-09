@@ -1,37 +1,37 @@
-// ASSETS //
+/**** ASSETS ****/
 import React, { useEffect } from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 
-// TYPES //
+/**** TYPES ****/
 type Props = {
-  repo: any;
+  repo: any; //would ideally like to export the Repo type from App to use here
 };
 
 const RepoDetails: React.FC<Props> = ({
-  repo
+  repo //selected repo object
 }) => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [repo])
+  }, [repo]) //scrolls to the top of the page when navigating from the search results
 
-// Helper Functions //
+/**** HELPER FUNCTIONS ****/
   const createDate = (date: string) => {
-    let day = new Date(date).toString().split(" ")
-    return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
-  };
+    let day = new Date(date).toString().split(' ')
+    return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(' ')
+  }; //formats OTC date to a UX friendly string
 
-// Render Functions //
+/**** RENDER FUNCTIONS ****/
   const displayDescription = () => {
     if(repo.description) {
       return (<p className="detail-description">{repo.description}</p>)
     } else {
       return (<p className="detail-description">No Description Available</p>)
     };
-  };
+  }; //conditionally renders the description or a placeholder if no description is available
 
-// COMPONENT RENDER //
+/**** COMPONENT RENDER ****/
   return (
     <article className="box detail-container" data-testid="repo-details">
       <header className="detail-header">

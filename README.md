@@ -1,9 +1,9 @@
 <br />
 <p align="center">
   <a href="https://github.com/Kristiannmiller/HE-Code-Exercise">
-    <img src="./assets/walkthrough.gif" alt="an overview gif of the application in action" width="600">
+    <img src="src/assets/walkthrough.gif" alt="an overview gif of the application in action" width="400">
   </a>
-  <h1 align="center" style="padding:0px; margin:10px 0px">React Engineer Code Exercise</h1>
+  <h1 align="center" style="padding:0px; margin:10px 0px">GitHunt</h1>
   <h5 align="center" style="margin:0px 0px 20px 0px; padding:0px;">Executed by Kristi Miller</h5>
   <p align="left">
     This is a code challenge for an open React Software Engineer position. The company wants to create a repository search application that utilizes the GitHub repository search API. The application displays the results of a query, and allows a user to sort and filter the results.
@@ -13,12 +13,12 @@
 
 ## About The Project
 
-### Testing Tools Used
-* ReactJS
+### Tools Used
 * TypeScript
+* ReactJS
 * Jest
 * React Testing Library
-* Ant.io
+* CSS
 
 ### Getting Started
 
@@ -47,29 +47,34 @@ To run the tests, run `npm test`
 ## About The Process
 
 ### My Process
-1. READING / RESEARCH : details.
+1. READING / RESEARCH : I have used TypeScript before, but wanted to give myself some time to research and understand it a little more, so I allocated a few hours to tutorials. I also used this time to familiarize myself with the GitHub API and the provided project details.
 
-2. PLANNING / SETUP : details.
+2. PLANNING / SETUP : I created the repo using create-react-app. I then planned out my schedule, and sequenced out sprints as GitHub milestones with connecting issues as tasks. I kept track of the tasks through Github Projects.
 
-3. LAYOUT : details.
+3. LAYOUT : I created a wireframe of my design idea, and came up with the general component architecture for the app.
+<p align="center">
+    <img src="./src/assets/wireframe.png" alt="wireframe of GitHunt with both desktop and mobile views" width="400" align="center">
+</p>
 
-4. FUNCTIONALITY : details.
 
-3. TESTING : details.
 
-4. DOCUMENTATION : details.
+4. FUNCTIONALITY : I tackled issues one by one, following the project details.
+
+3. TESTING : I implemented tests for all components.
+
+4. DOCUMENTATION : I updated the documentation of GitHunt to show my journey and left comments/questions for newcomers within the codebase.
 
 ## Wins
 
-- Win1
+- Architecture / Design : I had a blast doing this project because I loved the design. I was able to create a fully responsive product that's a close match to the wireframe. The architecture was well thought out, and made testing a breeze.
 
-- Win2
+- TypeScript : It's always a challenge using TypeScript in a quick project. This time around I came across a few minor issues that I had seen before and knew how to work around. Overall I feel like this project really helped me gain a greater understanding of TypeScript.
 
 ## Challenges
 
-- Challenge1
+- The API : The docs for the API were a little misleading. I started off using Octokit to fetch from the API because the docs made it seem like a necessity for authentication. I eventually ended up using Axios, and it works great!
 
-- Challenge2
+- Async Testing : I ran into some issues with testing the result of the APIcall. I'm sure a little extra time spent on testing would get me the result I'm looking for though.
 
 ## Contact Kristi
 * [Github](https://github.com/Kristiannmiller)
@@ -80,3 +85,5 @@ To run the tests, run `npm test`
 - [Repository](https://github.com/Kristiannmiller/HE-Code-Exercise)
 - [Project Board](https://github.com/Kristiannmiller/HE-Code-Exercise/projects/1)
 - [GitHub Repository Search API](https://docs.github.com/en/rest/reference/search#search-repositories)
+- [GitHub User Stat Repo](https://github.com/anuraghazra/github-readme-stats)
+- [Wireframe Created With Excalidraw](https://excalidraw.com/)

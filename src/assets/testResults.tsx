@@ -1,3 +1,5 @@
+// This is a test data file. It can be used to mock out the API data.
+
 export const testResults = [
   {
 "id": 374217255,

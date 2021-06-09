@@ -5,29 +5,29 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import ResultContainer from '../components/ResultContainer/ResultContainer';
 
-describe('Result Container', () => {
+describe("Result Container", () => {
 
   const selectRepo = jest.fn();
 
   const repos = [{
-    key: `repo1`, name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
+    key: 'repo1', name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
     ownerName: 'Kristiannmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/65047537?v=4',
     ownerUrl: 'https://api.github.com/users/Kristiannmiller', repoUrl: 'https://github.com/Kristiannmiller/HE-Code-Exercise',
     description: 'A coding exercise', language: 'TypeScript', stars: 0, forks: 0, openIssues: 7, created: '2021-06-05T21:42:19Z',
     lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'User'
   },
   {
-    key: `repo2`, name: 'sad-repo', fullName: 'Kristinotmiller/HE-Code-Exercise',
+    key: 'repo2', name: 'sad-repo', fullName: 'Kristinotmiller/HE-Code-Exercise',
     ownerName: 'Kristinotmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/6193285?v=4',
     ownerUrl: 'https://api.github.com/users/Kristinotmiller', repoUrl: 'https://github.com/Kristinotmiller/HE-Code-Exercise',
     description: '', language: '', stars: 0, forks: 0, openIssues: 7, created: '2021-06-05T21:42:19Z',
     lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'Organization'
   }];
 
-  const sadPath = {error: "Oh No!", loading: true, results: []}
-  const happyPath = {error: "", loading: false, results: [...repos]}
+  const sadPath = {error: 'Oh No!', loading: true, results: []}
+  const happyPath = {error: '', loading: false, results: [...repos]}
 
-  it('Renders Repo Card', () => {
+  it("Renders Repo Card", () => {
 
     render(
       <MemoryRouter>
@@ -42,7 +42,7 @@ describe('Result Container', () => {
     const resultsContainer = screen.getByTestId('results');
     expect(resultsContainer).toBeInTheDocument();
   });
-  it('Displays a welcome message if there is no error and no search results', () => {
+  it("Displays a welcome message if there is no error and no search results", () => {
 
     render(
       <MemoryRouter>
@@ -57,7 +57,7 @@ describe('Result Container', () => {
     const happyHunting = screen.getByText('Happy Hunting!');
     expect(happyHunting).toBeInTheDocument();
   });
-  it('Displays an error message', () => {
+  it("Displays an error message", () => {
 
     render(
       <MemoryRouter>
@@ -72,7 +72,7 @@ describe('Result Container', () => {
     const noResultError = screen.getByText(`${sadPath.error}`);
     expect(noResultError).toBeInTheDocument();
   });
-  it('Renders repo Cards', () => {
+  it("Renders repo Cards", () => {
 
     render(
       <MemoryRouter>

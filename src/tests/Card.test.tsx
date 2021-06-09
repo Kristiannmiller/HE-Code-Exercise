@@ -5,25 +5,25 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import Card from '../components/Card/Card';
 
-describe('Repo Card', () => {
+describe("Repo Card", () => {
 
   const selectRepo = jest.fn();
   const repo = {
-    key: `repo1`, name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
+    key: 'repo1', name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
     ownerName: 'Kristiannmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/65047537?v=4',
     ownerUrl: 'https://api.github.com/users/Kristiannmiller', repoUrl: 'https://github.com/Kristiannmiller/HE-Code-Exercise',
     description: 'A coding exercise', language: 'TypeScript', stars: 0, forks: 0, openIssues: 7, created: '2021-06-05T21:42:19Z',
     lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'User'
   };
   const sadRepo = {
-    key: `repo1`, name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
+    key: 'repo1', name: 'HE-Code-Exercise', fullName: 'Kristiannmiller/HE-Code-Exercise',
     ownerName: 'Kristiannmiller', ownerIcon: 'https://avatars.githubusercontent.com/u/65047537?v=4',
     ownerUrl: 'https://api.github.com/users/Kristiannmiller', repoUrl: 'https://github.com/Kristiannmiller/HE-Code-Exercise',
     description: '', language: '', stars: 0, forks: 0, openIssues: 7, created: '2021-06-05T21:42:19Z',
     lastUpdated: '2021-06-09T05:45:08Z', ssh: 'git@github.com:Kristiannmiller/HE-Code-Exercise.git', ownerType: 'User'
   };
 
-  it('Renders Repo Card', () => {
+  it("Renders Repo Card", () => {
 
     render(
       <MemoryRouter>
@@ -37,7 +37,7 @@ describe('Repo Card', () => {
     const cardContainer = screen.getByTestId(`${repo.name}-link`);
     expect(cardContainer).toBeInTheDocument();
   });
-  it('Displays the Repository name', () => {
+  it("Displays the Repository name", () => {
 
     render(
       <MemoryRouter>
@@ -91,7 +91,7 @@ describe('Repo Card', () => {
       </MemoryRouter>
     );
 
-    const noDescription = screen.getByText(`No Description Available`);
+    const noDescription = screen.getByText('No Description Available');
     expect(noDescription).toBeInTheDocument();
   });
   it("Displays the Repository's star count", () => {
