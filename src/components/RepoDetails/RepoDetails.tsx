@@ -5,21 +5,12 @@ import './RepoDetails.css';
 
 // TYPES //
 type Props = {
-  error: string;
-  loading: boolean;
   repo: any;
 };
 
 const RepoDetails: React.FC<Props> = ({
-  error,
-  loading,
   repo
 }) => {
-
-// State //
-  const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  useMemo(() => setIsLoading(loading), [isLoading]);
 
 // Helper Functions //
   const createDate = (date: string) => {

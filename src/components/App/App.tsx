@@ -124,13 +124,13 @@ const App = () => {
   };
 
   const renderRepoDetails = () => {
-    if(error || selectedRepo.key === '0' || isLoading) {
+    if(error || selectedRepo.key === '0') {
       return (
         <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
       )
     } else {
       return (
-        <RepoDetails error={error} loading={isLoading} repo={selectedRepo}/>
+        <RepoDetails repo={selectedRepo}/>
       )
     };
   };
