@@ -18,6 +18,15 @@ const RepoDetails: React.FC<Props> = ({
     return ([`${day[0]},`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
   };
 
+// Render Functions //
+  const displayDescription = () => {
+    if(repo.description) {
+      return (<p className="detail-description">{repo.description}</p>)
+    } else {
+      return (<p className="detail-description">No Description Available</p>)
+    }
+  }
+
 // COMPONENT RENDER //
   return (
     <article className="box detail-container">
@@ -26,8 +35,7 @@ const RepoDetails: React.FC<Props> = ({
           <h1 className="detail-title"><a className="atag-color" rel="noreferrer" target="_blank" href={repo.repoUrl}>{repo.name}</a></h1>
           <h2 className="detail-owner"><a className="atag-color" rel="noreferrer" target="_blank" href={repo.ownerUrl}>{repo.ownerName}</a></h2>
           <section className="detail-description-wrap">
-            {repo.description && <p className="detail-description">{repo.description}</p>}
-            {!repo.description && <p className="detail-description">No Description Available</p>}
+            {displayDescription()}
           </section>
           <section className="detail-badges">
             {repo.language && <div className="badge language">{repo.language}</div>}
