@@ -1,5 +1,5 @@
 // ASSETS //
-import React from 'react';
+import React, { useEffect } from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 
@@ -11,6 +11,10 @@ type Props = {
 const RepoDetails: React.FC<Props> = ({
   repo
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [repo])
 
 // Helper Functions //
   const createDate = (date: string) => {
