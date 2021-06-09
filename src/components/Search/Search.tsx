@@ -61,7 +61,7 @@ const Search: React.FC<Props> = ({
       setHasResults(false)
       resetSearch()
     }
-    if(keyword === "") resetSearch()
+    if(keyword === '""') resetSearch()
     setKeyword(e.target.value)
   }; //handles setting state to current input values on change, and resets results if needed
 
