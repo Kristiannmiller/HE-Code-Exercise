@@ -1,8 +1,11 @@
+// ASSETS //
 import React, { useState, useMemo }  from 'react';
 import { Repo } from '../App/App';
-import Card from '../Card/Card';
 import './ResultContainer.css';
+// COMPONENTS //
+import Card from '../Card/Card';
 
+// TYPES //
 type Props = {
   error: string;
   loading: boolean;
@@ -17,18 +20,20 @@ const ResultContainer: React.FC<Props> = ({
   selectRepo
 }) => {
 
+// State //
   const [keyword, setKeyword] = useState('');
   const [hasError, setHasError] = useState(error !== "");
-  const [isLoading, setIsLoading] = useState(true)
-
+  const [isLoading, setIsLoading] = useState(true);
   useMemo(() => setIsLoading(loading), [loading]);
 
+// Helper Functions //
   const welcomePage = () => {
     if(!hasError && searchResults.length < 1 && !isLoading) {
       return true
     }
-  }
+  };
 
+// Render Functions //
   const createCards = () => {
     return searchResults.map(repo => {
       return (
@@ -37,8 +42,8 @@ const ResultContainer: React.FC<Props> = ({
           selectRepo={selectRepo}
         />
       )
-    })
-  }
+    });
+  };
 
   const displayError = () => {
     return (
@@ -46,7 +51,7 @@ const ResultContainer: React.FC<Props> = ({
         <h1>Whoops!</h1><h2 className="error">{error}</h2>
       </section>
     )
-  }
+  };
 
   const displayLoading = () => {
     return (
@@ -54,8 +59,9 @@ const ResultContainer: React.FC<Props> = ({
         <h1>Loading...</h1><h2 className="error">This should just take a second</h2>
       </section>
     )
-  }
+  };
 
+// COMPONENT RENDER //
   return (
     <section className="result-container">
       {welcomePage() &&
@@ -75,6 +81,6 @@ const ResultContainer: React.FC<Props> = ({
       {!hasError ? createCards() : displayError()}
     </section>
   );
-}
+};
 
 export default ResultContainer;
