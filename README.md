@@ -52,7 +52,10 @@ To run the tests, run `npm test`
 2. PLANNING / SETUP : I created the repo using create-react-app. I then planned out my schedule, and sequenced out sprints as GitHub milestones with connecting issues as tasks. I kept track of the tasks through Github Projects.
 
 3. LAYOUT : I created a wireframe of my design idea, and came up with the general component architecture for the app.
-<img src="./src/assets/wireframe.png" alt="wireframe of GitHunt with both desktop and mobile views" width="400" align="center">
+<p align="center">
+    <img src="./src/assets/wireframe.png" alt="wireframe of GitHunt with both desktop and mobile views" width="400" align="center">
+</p>
+
 
 
 4. FUNCTIONALITY : I tackled issues one by one, following the project details.
@@ -83,4 +86,4 @@ To run the tests, run `npm test`
 - [Project Board](https://github.com/Kristiannmiller/HE-Code-Exercise/projects/1)
 - [GitHub Repository Search API](https://docs.github.com/en/rest/reference/search#search-repositories)
 - [GitHub User Stat Repo](https://github.com/anuraghazra/github-readme-stats)
-- [Icons From Iconmonstr](https://iconmonstr.com/)
+- [Wireframe Created With Excalidraw](https://excalidraw.com/)
