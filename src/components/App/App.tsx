@@ -31,7 +31,7 @@ export type Repo = {
 
 const App = () => {
 
-  // Global Variables //
+// Global Variables //
   const blankRepo = {
     key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
     ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
@@ -39,14 +39,14 @@ const App = () => {
     ownerType: ''
   };
 
-  // State //
+// State //
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
   const [isDetailView, setIsDetailView] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Handler Functions //
+// Handler Functions //
   const handleNewSearch = (search: any) => {
     setIsLoading(true)
     getSearchResults(search)
@@ -75,7 +75,7 @@ const App = () => {
     setIsLoading(false)
   };
 
-  // Helper Functions //
+// Helper Functions //
   const refineResults = (results: any) => {
     return results.map((repo: any, index: number) => {
       return {
