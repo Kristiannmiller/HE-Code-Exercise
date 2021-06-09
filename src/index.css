@@ -1,3 +1,6 @@
+/* This file serves as a reset and a home base for global / reusable elements
+that are used in more than one component */
+
 /********  RESET  ********/
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
