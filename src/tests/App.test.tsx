@@ -5,9 +5,9 @@ import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../components/App/App';
 
-describe('App', () => {
+describe("App", () => {
 
-  it('Renders the App component', () => {
+  it("Renders the App component", () => {
 
     render(
       <MemoryRouter>
@@ -15,10 +15,10 @@ describe('App', () => {
       </MemoryRouter>
     );
 
-    const appContainer = screen.getByTestId(`app-wrap`);
+    const appContainer = screen.getByTestId("app-wrap");
     expect(appContainer).toBeInTheDocument();
   });
-  it('Displays the GitHunt logo', () => {
+  it("Displays the GitHunt logo", () => {
 
     render(
       <MemoryRouter>
@@ -29,7 +29,7 @@ describe('App', () => {
     const logo = screen.getByAltText("GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering");
     expect(logo).toBeInTheDocument();
   });
-  it('Renders the Search component', () => {
+  it("Renders the Search component", () => {
 
     render(
       <MemoryRouter>
@@ -41,3 +41,5 @@ describe('App', () => {
     expect(keywordInput).toBeInTheDocument();
   });
 });
+
+// Would love to add more async testing, but I ran into some issues with it and wanted to get everything turned in on time
