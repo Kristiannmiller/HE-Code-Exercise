@@ -1,26 +1,27 @@
+// ASSETS //
 import React, { useState } from 'react';
 import './Search.css';
 
+// TYPES //
 type Props = {
-  errorMessage: string;
   handleNewSearch: any;
   handleError(message: string): void;
   resetSearch(): void;
 };
 
 const Search: React.FC<Props> = ({
-  errorMessage,
   handleNewSearch,
   handleError,
   resetSearch
 }) => {
 
+// State //
   const [keyword, setKeyword] = useState('');
   const [hasResults, setHasResults] = useState(false);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
-  const [error, setError] = useState('')
 
+// Global Variables //
   const popularLanguages = [
     'JavaScript', 'Python', 'C', 'Java', 'Go', 'Perl', 'Ruby', 'Swift', 'Scala', 'PHP', 'C++',
     'R', 'Objective-C', 'SQL', 'MATLAB', 'Rust', 'TypeScript', 'Kotlin', 'CSS', 'HTML', 'Groovy',
@@ -29,8 +30,9 @@ const Search: React.FC<Props> = ({
     'Bash', 'Clojure', 'MQL4', 'Apex', 'LabVIEW', 'ABL', 'D', 'SAS', 'Logo', 'C#', 'Jupyter Notebook', 'CoffeeScript',
     'QML', 'Less', 'Makefile', 'Lua', 'Roff', 'Vala', 'Solidity', 'Starlark', 'TeX', 'Vue', 'React', 'React Native',
     'Erlang', 'Elixer', 'OCaml', 'OpenSCAD', 'Vim script'
-  ]
+  ];
 
+// Handler Functions //
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if(keyword === "") {
@@ -41,8 +43,8 @@ const Search: React.FC<Props> = ({
     } else {
       handleError('loading...')
       submitSearch()
-    }
-  }
+    };
+  };
 
   const submitSearch = () => {
     const search = {q: `${keyword}+`, sort: ''}
@@ -51,7 +53,7 @@ const Search: React.FC<Props> = ({
     handleNewSearch(search)
     setHasResults(true)
     handleError('')
-  }
+  };
 
   const handleChange = (e: any) => {
     e.preventDefault()
@@ -61,24 +63,22 @@ const Search: React.FC<Props> = ({
     }
     if(keyword === "") resetSearch()
     setKeyword(e.target.value)
-  }
+  };
 
+// Render Functions //
   const buildDropdownOptions = () => {
     return popularLanguages.map((lang: string, index: number) => {
       return (
         <option key={index}>{lang}</option>
       )
-    })
-  }
+    });
+  };
 
   return (
     <section className="search-container">
-
       <form onSubmit={(e) => handleSubmit(e)}>
         <input className="input" id="keyword" onChange={event => handleChange(event)} type="search" placeholder="Search Repositories By Keyword"/>
-
         <section className="filter-container">
-
         <div className="filter-wrap">
           <label className="label" htmlFor="language">Language :</label>
           <input className="filter" name="language" type="text" placeholder="optional" list="popLanguages" onChange={event => setFilter(event.target.value)}/>
@@ -91,13 +91,11 @@ const Search: React.FC<Props> = ({
             <option value="Stars">Number of Stars</option>
           </select>
         </div>
-
           <button className="button search">SEARCH</button>
         </section>
       </form>
-
     </section>
   );
-}
+};
 
 export default Search;

@@ -30,6 +30,8 @@
 .detail-description-wrap {
   grid-area: des;
   height: auto;
+  max-height: 7em;
+  overflow: scroll;
   width: 95%;
   margin: 10px;
   flex-grow: 1;

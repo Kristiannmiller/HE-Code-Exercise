@@ -1,31 +1,38 @@
-import React from 'react';
+// ASSETS //
+import React, { useState, useMemo }  from 'react';
 import { Repo } from '../App/App';
+import './ResultContainer.css';
+// COMPONENTS //
 import Card from '../Card/Card';
 
-
-import { useState } from 'react';
-import './ResultContainer.css';
-
+// TYPES //
 type Props = {
   error: string;
+  loading: boolean;
   searchResults: Repo[];
   selectRepo(repoKey: string): void;
 };
 
 const ResultContainer: React.FC<Props> = ({
   error,
+  loading,
   searchResults,
   selectRepo
 }) => {
 
-  const [keyword, setKeyword] = useState('');
+// State //
+  const [hasError, setHasError] = useState(error !== "");
+  const [isLoading, setIsLoading] = useState(true);
+  useMemo(() => setIsLoading(loading), [loading]);
 
+// Helper Functions //
   const welcomePage = () => {
-    if(error === '' && searchResults.length < 1) {
+    if(!hasError && searchResults.length < 1 && !isLoading) {
       return true
     }
-  }
+  };
 
+// Render Functions //
   const createCards = () => {
     return searchResults.map(repo => {
       return (
@@ -34,8 +41,8 @@ const ResultContainer: React.FC<Props> = ({
           selectRepo={selectRepo}
         />
       )
-    })
-  }
+    });
+  };
 
   const displayError = () => {
     return (
@@ -43,8 +50,17 @@ const ResultContainer: React.FC<Props> = ({
         <h1>Whoops!</h1><h2 className="error">{error}</h2>
       </section>
     )
-  }
+  };
 
+  const displayLoading = () => {
+    return (
+      <section className="box message-container">
+        <h1>Loading...</h1><h2 className="error">This should just take a second</h2>
+      </section>
+    )
+  };
+
+// COMPONENT RENDER //
   return (
     <section className="result-container">
       {welcomePage() &&
@@ -60,9 +76,10 @@ const ResultContainer: React.FC<Props> = ({
           <h2>Happy Hunting!</h2>
         </section>
       }
-      {error === '' ? createCards() : displayError()}
+      {isLoading && displayLoading()}
+      {!hasError ? createCards() : displayError()}
     </section>
   );
-}
+};
 
 export default ResultContainer;

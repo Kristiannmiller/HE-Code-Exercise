@@ -1,13 +1,15 @@
-import React from 'react';
+// ASSETS //
+import React, { useState } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
-import Search from '../Search/Search';
-import ResultContainer from '../ResultContainer/ResultContainer';
-import RepoDetails from '../RepoDetails/RepoDetails';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
-import { useState } from 'react';
+// COMPONENTS //
+import Search from '../Search/Search';
+import ResultContainer from '../ResultContainer/ResultContainer';
+import RepoDetails from '../RepoDetails/RepoDetails';
 
+// TYPES //
 export type Repo = {
   key: string,
   name: string,
@@ -27,29 +29,54 @@ export type Repo = {
   ownerType: string
 };
 
-function App() {
+const App = () => {
 
+// Global Variables //
   const blankRepo = {
     key: `0`, name: '', fullName: '', ownerName: '', ownerIcon: '',
     ownerUrl: '', repoUrl: '', description: '', language: '', stars: 0,
     forks: 0, openIssues: 0, created: '', lastUpdated: '', ssh: '',
     ownerType: ''
-  }
+  };
 
+// State //
   const [searchResults, setSearchResults] = useState<Repo[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
-  const [isDetailView, setIsDetailView] = useState(false)
-  const [error, setError] = useState('')
+  const [isDetailView, setIsDetailView] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-
+// Handler Functions //
   const handleNewSearch = (search: any) => {
+    setIsLoading(true)
     getSearchResults(search)
-    .then(response => setSearchResults(refineResults(response.items)))
+    .then(response => setSearchResults(handleResults(response.items)))
     .catch(error => setError(error.message))
-  }
+  };
 
+  const handleResults = (results: any) => {
+    if(results.length < 1) {
+      setError('No Results Found For Those Parameters. Please Try Again!')
+      return []
+    } else {
+      const newResults = refineResults(results)
+      setIsLoading(false)
+      return newResults
+    };
+  };
+
+  const handleError = (message: string) => setError(message);
+
+  const selectRepo = (repoKey: string) => {
+    setIsLoading(true)
+    setIsDetailView(true)
+    let repo = searchResults.find(repo => repo.key === repoKey)
+    if(repo) setSelectedRepo(repo)
+    setIsLoading(false)
+  };
+
+// Helper Functions //
   const refineResults = (results: any) => {
-    if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
     return results.map((repo: any, index: number) => {
       return {
         key: `repo${index}`,
@@ -69,63 +96,63 @@ function App() {
         ssh: repo.ssh_url,
         ownerType: repo.owner.type
       }
-    })
-  }
+    });
+  };
 
-  const resetSearch = () => setSearchResults([])
-
-  const handleError = (message: string) => setError(message)
+  const resetSearch = () => setSearchResults([]);
 
   const resetView = () => {
     setSelectedRepo(blankRepo)
     setIsDetailView(false)
-  }
+  };
 
-  const selectRepo = (repoKey: string) => {
-    setIsDetailView(true)
-    let repo = searchResults.find(repo => repo.key === repoKey)
-    if(repo) setSelectedRepo(repo)
-  }
+// Render Functions //
+  const renderSearch = () => {
+    if(!isDetailView) {
+      return (
+        <Search
+          handleNewSearch={handleNewSearch}
+          resetSearch={resetSearch}
+          handleError={handleError}
+        />)
+    } else {
+      return (
+        <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>
+      )
+    };
+  };
 
+  const renderRepoDetails = () => {
+    if(error || selectedRepo.key === '0') {
+      return (
+        <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
+      )
+    } else {
+      return (
+        <RepoDetails repo={selectedRepo}/>
+      )
+    };
+  };
 
+// COMPONENT RENDER //
   return (
     <div className="app">
-
       <header className="app-header">
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
-        {!isDetailView &&
-          <Search
-            errorMessage={error}
-            handleNewSearch={handleNewSearch}
-            resetSearch={resetSearch}
-            handleError={handleError}
-          />}
-          {isDetailView &&
-            <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
+        {renderSearch()}
       </header>
-
       <Switch>
         <Route path='/:repoKey/:repoName'
-        render={({ match }) => {
-          return (
-            <RepoDetails
-              repo={selectedRepo}
-            />)
-          }}>
+        render={({ match }) => renderRepoDetails()}>
         </Route>
         <Route exact path='/'>
-          <ResultContainer
-            error={error}
-            searchResults={searchResults}
-            selectRepo={selectRepo}
-            />
+          <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
         </Route>
       </Switch>
-
     </div>
   );
-}
+};
 
 export default App;
