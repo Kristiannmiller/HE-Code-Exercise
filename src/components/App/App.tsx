@@ -137,7 +137,7 @@ const App = () => {
 // COMPONENT RENDER //
   return (
     <BrowserRouter>
-    <div className="app">
+    <div className="app" data-testid="app-wrap">
       <header className="app-header">
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
