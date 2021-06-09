@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import Search from '../Search/Search';
 import ResultContainer from '../ResultContainer/ResultContainer';
@@ -6,7 +6,6 @@ import RepoDetails from '../RepoDetails/RepoDetails';
 import './App.css';
 import logo from '../../assets/logo.png';
 import { getSearchResults } from '../../apiCalls';
-import { useState } from 'react';
 
 export type Repo = {
   key: string,
@@ -40,16 +39,28 @@ function App() {
   const [selectedRepo, setSelectedRepo] = useState<Repo>(blankRepo);
   const [isDetailView, setIsDetailView] = useState(false)
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const handleNewSearch = (search: any) => {
+    setIsLoading(true)
     getSearchResults(search)
-    .then(response => setSearchResults(refineResults(response.items)))
+    .then(response => setSearchResults(handleResults(response.items)))
     .catch(error => setError(error.message))
   }
 
+  const handleResults = (results: any) => {
+    if(results.length < 1) {
+      setError('No Results Found For Those Parameters. Please Try Again!')
+      return []
+    } else {
+      const newResults = refineResults(results)
+      setIsLoading(false)
+      return newResults
+    }
+  }
+
   const refineResults = (results: any) => {
-    if(results.length < 1) setError('No Results Found For Those Parameters. Please Try Again!')
     return results.map((repo: any, index: number) => {
       return {
         key: `repo${index}`,
@@ -82,11 +93,11 @@ function App() {
   }
 
   const selectRepo = (repoKey: string) => {
-    setError("loading...")
+    setIsLoading(true)
     setIsDetailView(true)
     let repo = searchResults.find(repo => repo.key === repoKey)
     if(repo) setSelectedRepo(repo)
-    setError("")
+    setIsLoading(false)
   }
 
   const renderSearch = () => {
@@ -106,19 +117,13 @@ function App() {
   }
 
   const renderRepoDetails = () => {
-    if(error || selectedRepo.key === '0') {
+    if(error || selectedRepo.key === '0' || isLoading) {
       return (
-        <ResultContainer
-        error={error}
-        searchResults={searchResults}
-        selectRepo={selectRepo}
-        />)
+        <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
+      )
     } else {
       return (
-        <RepoDetails
-        error={error}
-        repo={selectedRepo}
-        />
+        <RepoDetails error={error} loading={isLoading} repo={selectedRepo}/>
       )
     }
   }
@@ -138,11 +143,7 @@ function App() {
         render={({ match }) => renderRepoDetails()}>
         </Route>
         <Route exact path='/'>
-          <ResultContainer
-            error={error}
-            searchResults={searchResults}
-            selectRepo={selectRepo}
-          />
+          <ResultContainer error={error} loading={isLoading} searchResults={searchResults} selectRepo={selectRepo}/>
         </Route>
       </Switch>
 

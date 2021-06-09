@@ -4,30 +4,32 @@ import './RepoDetails.css';
 
 type Props = {
   error: string
+  loading: boolean
   repo: any
 };
 
 const RepoDetails: React.FC<Props> = ({
   error,
+  loading,
   repo
 }) => {
 
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useMemo(() => setHasError(error !== ''), [error]);
+  useMemo(() => setIsLoading(loading), [isLoading]);
 
   const createDate = (date: string) => {
     let day = new Date(date).toString().split(" ")
     return ([`${day[0]}day,`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
   }
 
-  const displayError = () => {
+  const displayLoading = () => {
     
   }
 
   return (
     <article className="box detail-container">
-      {hasError && displayError()}
       <header className="detail-header">
         <img className="detail-avatar" src={repo.ownerIcon} alt={`${repo.ownerName}'s GitHub avatar`}/>
           <h1 className="detail-title"><a className="atag-color" rel="noreferrer" target="_blank" href={repo.repoUrl}>{repo.name}</a></h1>

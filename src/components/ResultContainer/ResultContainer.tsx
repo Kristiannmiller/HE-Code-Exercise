@@ -5,23 +5,26 @@ import './ResultContainer.css';
 
 type Props = {
   error: string;
+  loading: boolean;
   searchResults: Repo[];
   selectRepo(repoKey: string): void;
 };
 
 const ResultContainer: React.FC<Props> = ({
   error,
+  loading,
   searchResults,
   selectRepo
 }) => {
 
   const [keyword, setKeyword] = useState('');
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(error !== "");
+  const [isLoading, setIsLoading] = useState(true)
 
-  useMemo(() => setHasError(error !== ''), [error]);
+  useMemo(() => setIsLoading(loading), [loading]);
 
   const welcomePage = () => {
-    if(error === '' && searchResults.length < 1) {
+    if(!hasError && searchResults.length < 1 && !isLoading) {
       return true
     }
   }
@@ -45,6 +48,14 @@ const ResultContainer: React.FC<Props> = ({
     )
   }
 
+  const displayLoading = () => {
+    return (
+      <section className="box message-container">
+        <h1>Loading...</h1><h2 className="error">This should just take a second</h2>
+      </section>
+    )
+  }
+
   return (
     <section className="result-container">
       {welcomePage() &&
@@ -60,7 +71,8 @@ const ResultContainer: React.FC<Props> = ({
           <h2>Happy Hunting!</h2>
         </section>
       }
-      {error === '' ? createCards() : displayError()}
+      {isLoading && displayLoading()}
+      {!hasError ? createCards() : displayError()}
     </section>
   );
 }
