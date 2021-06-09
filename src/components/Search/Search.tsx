@@ -4,14 +4,12 @@ import './Search.css';
 
 // TYPES //
 type Props = {
-  errorMessage: string;
   handleNewSearch: any;
   handleError(message: string): void;
   resetSearch(): void;
 };
 
 const Search: React.FC<Props> = ({
-  errorMessage,
   handleNewSearch,
   handleError,
   resetSearch
@@ -22,7 +20,6 @@ const Search: React.FC<Props> = ({
   const [hasResults, setHasResults] = useState(false);
   const [filter, setFilter] = useState('');
   const [sort, setSort] = useState('');
-  const [error, setError] = useState('');
 
 // Global Variables //
   const popularLanguages = [

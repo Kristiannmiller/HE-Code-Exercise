@@ -21,7 +21,6 @@ const ResultContainer: React.FC<Props> = ({
 }) => {
 
 // State //
-  const [keyword, setKeyword] = useState('');
   const [hasError, setHasError] = useState(error !== "");
   const [isLoading, setIsLoading] = useState(true);
   useMemo(() => setIsLoading(loading), [loading]);

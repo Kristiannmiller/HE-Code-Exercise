@@ -111,10 +111,9 @@ const App = () => {
     if(!isDetailView) {
       return (
         <Search
-        errorMessage={error}
-        handleNewSearch={handleNewSearch}
-        resetSearch={resetSearch}
-        handleError={handleError}
+          handleNewSearch={handleNewSearch}
+          resetSearch={resetSearch}
+          handleError={handleError}
         />)
     } else {
       return (

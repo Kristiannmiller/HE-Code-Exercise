@@ -1,5 +1,5 @@
 // ASSETS //
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 
@@ -24,8 +24,8 @@ const RepoDetails: React.FC<Props> = ({
       return (<p className="detail-description">{repo.description}</p>)
     } else {
       return (<p className="detail-description">No Description Available</p>)
-    }
-  }
+    };
+  };
 
 // COMPONENT RENDER //
   return (
