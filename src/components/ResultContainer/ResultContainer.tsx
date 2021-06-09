@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState, useMemo }  from 'react';
 import { Repo } from '../App/App';
 import Card from '../Card/Card';
-
-
-import { useState } from 'react';
 import './ResultContainer.css';
 
 type Props = {
@@ -19,6 +16,9 @@ const ResultContainer: React.FC<Props> = ({
 }) => {
 
   const [keyword, setKeyword] = useState('');
+  const [hasError, setHasError] = useState(false);
+
+  useMemo(() => setHasError(error !== ''), [error]);
 
   const welcomePage = () => {
     if(error === '' && searchResults.length < 1) {

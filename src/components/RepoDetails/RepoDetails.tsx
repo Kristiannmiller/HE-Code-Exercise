@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import fork from '../../assets/fork.png';
 import './RepoDetails.css';
 
 type Props = {
+  error: string
   repo: any
 };
 
 const RepoDetails: React.FC<Props> = ({
+  error,
   repo
 }) => {
+
+  const [hasError, setHasError] = useState(false);
+
+  useMemo(() => setHasError(error !== ''), [error]);
 
   const createDate = (date: string) => {
     let day = new Date(date).toString().split(" ")
     return ([`${day[0]}day,`, `${day[1]}.`, `${day[2]},`, day[3]]).join(" ")
   }
 
+  const displayError = () => {
+    
+  }
+
   return (
     <article className="box detail-container">
-
+      {hasError && displayError()}
       <header className="detail-header">
         <img className="detail-avatar" src={repo.ownerIcon} alt={`${repo.ownerName}'s GitHub avatar`}/>
           <h1 className="detail-title"><a className="atag-color" rel="noreferrer" target="_blank" href={repo.repoUrl}>{repo.name}</a></h1>

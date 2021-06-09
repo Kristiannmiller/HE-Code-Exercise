@@ -82,11 +82,46 @@ function App() {
   }
 
   const selectRepo = (repoKey: string) => {
+    setError("loading...")
     setIsDetailView(true)
     let repo = searchResults.find(repo => repo.key === repoKey)
     if(repo) setSelectedRepo(repo)
+    setError("")
   }
 
+  const renderSearch = () => {
+    if(!isDetailView) {
+      return (
+        <Search
+        errorMessage={error}
+        handleNewSearch={handleNewSearch}
+        resetSearch={resetSearch}
+        handleError={handleError}
+        />)
+    } else {
+      return (
+        <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>
+      )
+    }
+  }
+
+  const renderRepoDetails = () => {
+    if(error || selectedRepo.key === '0') {
+      return (
+        <ResultContainer
+        error={error}
+        searchResults={searchResults}
+        selectRepo={selectRepo}
+        />)
+    } else {
+      return (
+        <RepoDetails
+        error={error}
+        repo={selectedRepo}
+        />
+      )
+    }
+  }
 
   return (
     <div className="app">
@@ -95,32 +130,19 @@ function App() {
         <Link to={`/`}>
           <img onClick={() => resetView()} className="logo" src={logo} alt="GitHunt logo: Octocat inside of a magnifying glass with GitHunt next to it in white lettering"/>
         </Link>
-        {!isDetailView &&
-          <Search
-            errorMessage={error}
-            handleNewSearch={handleNewSearch}
-            resetSearch={resetSearch}
-            handleError={handleError}
-          />}
-          {isDetailView &&
-            <Link className="button back" to={`/`} onClick={() => resetView()}>{`< back to search`}</Link>}
+        {renderSearch()}
       </header>
 
       <Switch>
         <Route path='/:repoKey/:repoName'
-        render={({ match }) => {
-          return (
-            <RepoDetails
-              repo={selectedRepo}
-            />)
-          }}>
+        render={({ match }) => renderRepoDetails()}>
         </Route>
         <Route exact path='/'>
           <ResultContainer
             error={error}
             searchResults={searchResults}
             selectRepo={selectRepo}
-            />
+          />
         </Route>
       </Switch>
 
