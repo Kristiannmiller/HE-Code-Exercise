@@ -21,7 +21,7 @@ const ResultContainer: React.FC<Props> = ({
 }) => {
 
 /**** STATE ****/
-  const [hasError, setHasError] = useState(error !== ""); //boolean determining if there is an error message in error prop (just makes error handling a little easier)
+  const [hasError, setHasError] = useState(error !== ''); //boolean determining if there is an error message in error prop (just makes error handling a little easier)
   const [isLoading, setIsLoading] = useState(true); //boolean determining loading status for loading message display
   useMemo(() => setIsLoading(loading), [loading]); //sets isLoading if the loading prop changes on rerender
 
