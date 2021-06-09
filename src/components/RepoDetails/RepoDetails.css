@@ -1,116 +1,91 @@
+/********  CONTAINERS  ********/
+
 .detail-container {
-  display: flex;
-  flex-direction: column;
   width: 90%;
-  height:100%;
-  /* box-shadow: 1px 1px 10px #f1f1f1; */
-  border-radius: 100px;
   margin: 20px;
-  /* flex-grow: 1; */
   padding: 25px 10px 50px 10px;
-  overflow-wrap: anywhere;
-  background-color: 	hsl(0, 0%, 95%, 5%);
-  /* border: 1px solid white; */
   align-self: center;
-}
-.detail-intro {
-  width: 100%;
-}
-.card-forks {
-  color: white;
-  background-color: black;
-  padding: 5px 15px;
-  border-radius: 5px;
-  border: 1px solid #f1f1f1;
-  width: fit-content;
-  margin: 3px;
-  display: flex;
-  align-items: center;
-}
-.detail-header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.detail-avatar {
-  width: 200px;
-  border-radius: 360px;
-  margin: 20px;
-  border: 2px solid #2ea44f;
-  background-color: #f1f1f1;
-}
-.detail-title {
-  width: auto;
-  font-family: 'Yantramanav', sans-serif;
-  font-weight: 400;
-  letter-spacing: 1px;
-  font-size: 3em;
-  color: #f1f1f1;
-  margin: 10px;
-  padding: 0;
-}
-.atag-color {
-  color: inherit;
-}
-.detail-owner {
-  margin: -15px 0px 10px 10px;
-  padding: 0;
-  font-size: 2em;
-}
-.owner-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.repo-stats {
-  padding: 15px 25px 20px 25px;
-  width: 40%;
-  height: 100%;
-  background-color: #fffefe;
-  border-radius: 4.5px;
-}
-.owner-stats-container {
-  width: 40%;
-  height: 90%;
-  background-color: #fffefe;
-  border-radius: 4.5px;
-}
-.owner-stats-git {
-  width: 40%;
-  margin: 20px;
+  overflow-wrap: anywhere;
 }
 
-.repo-stat-title {
-  font-size: 1.4em;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: #41b883;
-  margin-bottom: 13px;
-}
-.repo-stat {
-  margin-bottom: 8px;
-  font-size: 1.1em;
-  font-weight: 600;
-  color: #273849;
-  letter-spacing: 0;
+.detail-header {
+  display: grid;
+  grid-template-columns: 250px auto;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+  "av title"
+  "av owner"
+  "av des"
+  "av badges"
 }
 
 .detail-badges {
+  grid-area: badges;
+  width: 100%;
+  margin: 0px 0px 10px 10px;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  margin: 10px;
-  width: 100%;
 }
 
 .detail-description-wrap {
+  grid-area: des;
   height: auto;
   width: 95%;
-  background-color: white;
-  border-radius: 5px;
-  flex-grow: 1;
   margin: 10px;
+  flex-grow: 1;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.stats-container {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.repo-stats {
+  width: 40%;
+  height: 100%;
+  margin-top: 10px;
+  padding: 25px;
+  border-radius: 4.5px;
+  background-color: #fffefe;
+}
+
+/********  ELEMENTS  ********/
+
+.detail-avatar {
+  grid-area: av;
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border: 2px solid #2ea44f;
+  border-radius: 360px;
+  background-color: #f1f1f1;
+}
+
+.detail-title {
+  grid-area: title;
+  width: auto;
+  margin: 0px 10px;
+  padding: 0;
+  align-self: flex-end;
+  font-size: 3em;
+  letter-spacing: 1px;
+  line-height: 1;
+  font-family: 'Yantramanav', sans-serif;
+  font-weight: 400;
+  color: #f1f1f1;
+}
+
+.detail-owner {
+  grid-area: owner;
+  padding: 0;
+  margin-left: 10px;
+  align-self: top;
+  font-size: 2em;
 }
 
 .detail-description {
@@ -119,4 +94,117 @@
   border-radius: 5px;
   background-color: white;
   color: black;
+}
+
+.forks {
+  border: 1px solid #f1f1f1;
+  background-color: black;
+}
+
+.atag-color {
+  color: inherit;
+}
+
+.repo-stat-title {
+  margin-bottom: 13px;
+  font-size: 1.4em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #41b883;
+}
+
+.repo-stat {
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #273849;
+}
+
+.stat-cat {
+  margin-right: 15px;
+}
+
+.owner-stats-git {
+  height: 100%;
+  margin: 20px;
+}
+
+/********  MEDIA QUERIES  ********/
+
+@media screen and (max-width: 1050px) {
+  .detail-title {
+    font-size: 2.5em;
+  }
+  .stats-container {
+    flex-direction: column;
+  }
+  .repo-stats {
+    width: 90%;
+  }
+  .owner-stats {
+    width:100%;
+    text-align: center;
+  }
+  .owner-stats-git {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .detail-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 15px;
+    justify-self: center;
+  }
+  .detail-header {
+    grid-template-columns: 200px auto;
+    grid-template-areas:
+      "av title"
+      "av owner"
+      "des des"
+      "badges badges"
+  }
+  .detail-badges {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 500px) {
+  .detail-header {
+    grid-template-columns: 160px auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "av badges"
+      "title title"
+      "owner owner"
+      "des des"
+  }
+  .detail-title {
+    margin-top: 15px;
+    font-size: 2em;
+  }
+  .detail-owner {
+    font-size: 1.5em;
+  }
+  .detail-badges {
+    width: auto;
+    padding-left: 10px;
+    border-left: 1px solid white;
+    flex-direction: column;
+  }
+  .detail-avatar {
+    justify-self: flex-end;
+    margin: 5px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .detail-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .detail-header {
+    grid-template-columns: 110px auto;
+  }
 }

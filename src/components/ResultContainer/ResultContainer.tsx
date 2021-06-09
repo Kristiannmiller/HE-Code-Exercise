@@ -39,7 +39,7 @@ const ResultContainer: React.FC<Props> = ({
 
   const displayError = () => {
     return (
-      <section className="message-container">
+      <section className="box message-container">
         <h1>Whoops!</h1><h2 className="error">{error}</h2>
       </section>
     )
@@ -48,7 +48,7 @@ const ResultContainer: React.FC<Props> = ({
   return (
     <section className="result-container">
       {welcomePage() &&
-        <section className="message-container">
+        <section className="box message-container">
           <h1 className="greeting"><span>Welcome To</span> <strong>GitHunt</strong></h1>
           <article className="directions">
             <p>
