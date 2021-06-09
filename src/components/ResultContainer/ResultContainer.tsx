@@ -1,6 +1,9 @@
 import React from 'react';
 import { Repo } from '../App/App';
 import Card from '../Card/Card';
+
+
+import { useState } from 'react';
 import './ResultContainer.css';
 
 type Props = {
@@ -15,6 +18,8 @@ const ResultContainer: React.FC<Props> = ({
   selectRepo
 }) => {
 
+  const [keyword, setKeyword] = useState('');
+
   const welcomePage = () => {
     if(error === '' && searchResults.length < 1) {
       return true
@@ -22,21 +27,28 @@ const ResultContainer: React.FC<Props> = ({
   }
 
   const createCards = () => {
-    return searchResults.map((repo:any, index:number) => {
+    return searchResults.map(repo => {
       return (
         <Card
-          key={index}
           repoData={repo}
           selectRepo={selectRepo}
-        />)
+        />
+      )
     })
+  }
+
+  const displayError = () => {
+    return (
+      <section className="box message-container">
+        <h1>Whoops!</h1><h2 className="error">{error}</h2>
+      </section>
+    )
   }
 
   return (
     <section className="result-container">
-
-      { welcomePage() &&
-        <section className="welcome">
+      {welcomePage() &&
+        <section className="box message-container">
           <h1 className="greeting"><span>Welcome To</span> <strong>GitHunt</strong></h1>
           <article className="directions">
             <p>
@@ -46,10 +58,9 @@ const ResultContainer: React.FC<Props> = ({
             <br></br><p><span>To get started</span> just type a keyword into the search bar and click 'SEARCH' or press 'Enter'.</p>
           </article>
           <h2>Happy Hunting!</h2>
-        </section> }
-
-      { error === '' ? createCards() : <h1>{error}</h1> }
-
+        </section>
+      }
+      {error === '' ? createCards() : displayError()}
     </section>
   );
 }

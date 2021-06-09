@@ -14,16 +14,16 @@ const Card: React.FC<Props> = ({
 
 
   return (
-    <Link className="card" onClick={() => selectRepo(repoData.key)} to={`/${repoData.key}/${repoData.name}`} data-testid={`${repoData.name}-link`}>
+    <Link className="card-wrap" onClick={() => selectRepo(repoData.key)} to={`/${repoData.key}/${repoData.name}`} data-testid={`${repoData.name}-link`}>
 
       <header className="card-header">
         <img className="card-avatar" src={repoData.ownerIcon} alt={`${repoData.ownerName}'s GitHub avatar`}/>
         <section className="card-badges">
-          {repoData.language && <div className="card-language">{repoData.language}</div>}
-          <div className="card-stars">{`⭑ ${repoData.stars}`}</div>
+          {repoData.language && <div className="badge language">{repoData.language}</div>}
+          <div className="badge stars">{`⭑ ${repoData.stars}`}</div>
         </section>
       </header>
-      
+
       <h1 className="card-title">{repoData.name}</h1>
 
       <section className="description-wrap">
